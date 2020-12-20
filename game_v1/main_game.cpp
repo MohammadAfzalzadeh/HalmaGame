@@ -190,7 +190,9 @@ void move(int pos1_x,int pos1_y,int pos_x,int pos_y,char ch,int s_color) {
 	printf("%c",ch);
 	setTextColor(font_color, back_color);
 }
-int select_turn(int turn) {
+int select_turn(int turn,int n) {
+	gotoxy2(0, 2 * n+2);
+	printf("              ");
 	if (turn == 1)
 		return 2;
 	return 1;
@@ -203,8 +205,8 @@ int check(int player,int pos1_x,int pos1_y,int state[][25]) {
 	return 0;
 }
 void update_arry(int player, int pos1_x, int pos1_y, int state[][25]) {
-	state[pos1_x][pos1_y] = 0;
-	state[pos_x][pos_y] = player;
+	state[((pos1_x+1)/2)-1][((pos1_y+1)/2)-1] = 0;
+	state[((pos_x+1)/2)-1][((pos_y)/2)-1] = player;
 }
 int main() {
 	int n=16;
@@ -245,6 +247,12 @@ int main() {
 			if (check(1, pos1_x, pos1_y,state) == 1) {
 				move(pos1_x, pos1_y, pos_x, pos_y, star, star_c);
 				update_arry(1, pos1_x, pos1_y, state);
+				turn = select_turn(turn, n);
+			}
+			else
+			{
+				gotoxy2(0, 2 * n + 2);
+				printf("invalid move");
 			}
 			gotoxy2(pos_x, pos_y);
 		}
@@ -259,13 +267,20 @@ int main() {
 			gotoxy2(pos_x, pos_y);
 			move_with_keyboard2(n, pos1_x, pos1_y);
 			move_with_keyboard2(n, pos_x, pos_y);
-			move(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
+			if (check(2, pos1_x, pos1_y, state) == 1){
+				move(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
+				update_arry(2, pos1_x, pos1_y, state);
+				turn = select_turn(turn,n);
+			}
+			else
+			{
+				gotoxy2(0, 2 * n + 2);
+				printf("invalid move");
+			}
 			gotoxy2(pos_x, pos_y);
 		}
-		turn = select_turn(turn);
-
 	} while (true);
 	
-	gotoxy2(0,100);
+	gotoxy2(0,2*n+3);
 	return 0;
 }
