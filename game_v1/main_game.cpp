@@ -206,7 +206,7 @@ int check(int player,int pos1_x,int pos1_y,int state[][25]) {
 }
 void update_arry(int player, int pos1_x, int pos1_y, int state[][25]) {
 	state[((pos1_x+1)/2)-1][((pos1_y+1)/2)-1] = 0;
-	state[((pos_x+1)/2)-1][((pos_y)/2)-1] = player;
+	state[((pos_x+1)/2)-1][((pos_y)/2)] = player;
 }
 int main() {
 	int n=16;
@@ -216,6 +216,7 @@ int main() {
 	int state[25][25] = { {0} };//tol arayeh eslsh shvad
 	int mohreh_dar_aval[7];
 	mohreh_dar_aval[0] = 1;
+
 	mohreh_dar_aval[1] = 2;
 	mohreh_dar_aval[2] = 3;
 	mohreh_dar_aval[3] = 4;
