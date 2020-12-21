@@ -3,6 +3,12 @@
 #include <conio.h>
 #include <time.h>
 //#include <ctime>
+//baray seri baad 
+// 0- vasat chin kardan jadval
+//0.1-khaneh hay jadval bozog shavad
+//1- pos_x , pos_y az halat gelobal be local avaz shavad
+//2- barasi shvad ke dar khane magsad mohrei nabashad 
+// 3- moshkel (#include <ctime>)  hal she
 const int back_color = 15;
 const int font_color = 0;
 const char star = '*';
