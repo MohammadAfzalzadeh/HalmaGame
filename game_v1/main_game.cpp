@@ -188,6 +188,70 @@ void move_with_keyboard2(int n,int &pos1_x,int &pos1_y) {
 		pos1_y = pos_y;
 	} while (ch!=13);
 }
+void move_with_keyboard1(int n, int& pos1_x, int& pos1_y) {
+	char ch;
+	do
+	{
+		ch = _getch();
+		if (ch == 0 || ch == 224)
+			ch = _getch();
+		if (ch == 77) {
+			/*
+			==>
+			*/
+		}
+
+		else if (ch == 75) {
+			/*
+			<==
+			*/
+		}
+		else if (ch == 80) {
+			/*
+			||
+			||
+			||
+			/\
+			/\
+			/\
+			payyn
+			*/
+		}
+
+		else if (ch == 72) {
+			/*
+			/\
+			/\
+			/\
+			||
+			||
+			||
+			||
+			bala
+			*/
+		}
+
+		//else break;
+		if (pos_x < 0) {
+			pos_x = 1;
+		}
+		if (pos_y < 0)
+		{
+			pos_y = 1;
+		}
+		if (pos_x > 2 * n)
+		{
+			pos_x = 2 * n - 1;
+		}
+		if (pos_y > 2 * n)
+		{
+			pos_y = 2 * n - 1;
+		}
+		gotoxy2(pos_x, pos_y);
+		pos1_x = pos_x;
+		pos1_y = pos_y;
+	} while (ch != 13);
+}
 void move(int pos1_x,int pos1_y,int pos_x,int pos_y,char ch,int s_color) {
 	gotoxy2(pos1_x,pos1_y);
 	printf(" ");
@@ -222,7 +286,6 @@ int main() {
 	int state[25][25] = { {0} };//tol arayeh eslsh shvad
 	int mohreh_dar_aval[7];
 	mohreh_dar_aval[0] = 1;
-
 	mohreh_dar_aval[1] = 2;
 	mohreh_dar_aval[2] = 3;
 	mohreh_dar_aval[3] = 4;
