@@ -199,12 +199,14 @@ void move_with_keyboard1(int n, int& pos1_x, int& pos1_y) {
 			/*
 			==>
 			*/
+			pos_x += 2;
 		}
 
 		else if (ch == 75) {
 			/*
 			<==
 			*/
+			pos_x -= 2;
 		}
 		else if (ch == 80) {
 			/*
@@ -216,6 +218,7 @@ void move_with_keyboard1(int n, int& pos1_x, int& pos1_y) {
 			/\
 			payyn
 			*/
+			pos_y += 2;
 		}
 
 		else if (ch == 72) {
@@ -229,6 +232,7 @@ void move_with_keyboard1(int n, int& pos1_x, int& pos1_y) {
 			||
 			bala
 			*/
+			pos_y -= 2;
 		}
 
 		//else break;
@@ -312,8 +316,8 @@ int main() {
 			pos_x = 1;
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
-			move_with_keyboard2(n, pos1_x, pos1_y);
-			move_with_keyboard2(n, pos_x, pos_y);
+			move_with_keyboard1(n, pos1_x, pos1_y);
+			move_with_keyboard1(n, pos_x, pos_y);
 			if (check(1, pos1_x, pos1_y,state) == 1) {
 				move(pos1_x, pos1_y, pos_x, pos_y, star, star_c);
 				update_arry(1, pos1_x, pos1_y, state);
@@ -335,8 +339,8 @@ int main() {
 			pos_x = 1;
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
-			move_with_keyboard2(n, pos1_x, pos1_y);
-			move_with_keyboard2(n, pos_x, pos_y);
+			move_with_keyboard1(n, pos1_x, pos1_y);
+			move_with_keyboard1(n, pos_x, pos_y);
 			if (check(2, pos1_x, pos1_y, state) == 1){
 				move(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
 				update_arry(2, pos1_x, pos1_y, state);
