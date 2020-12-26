@@ -9,6 +9,8 @@
 //1- pos_x , pos_y az halat gelobal be local avaz shavad
 //2- barasi shvad ke dar khane magsad mohrei nabashad 
 // 3- moshkel (#include <ctime>)  hal she
+//KEY BOARD 1 CHECK SHAVAD
+//
 const int back_color = 15;
 const int font_color = 0;
 const char star = '*';
@@ -193,48 +195,70 @@ void move_with_keyboard1(int n, int& pos1_x, int& pos1_y) {
 	do
 	{
 		ch = _getch();
-		if (ch == 0 || ch == 224)
+		if (ch == 0 || ch == 224) 
 			ch = _getch();
-		if (ch == 77) {
-			/*
-			==>
-			*/
-			pos_x += 2;
-		}
+			if (ch == 77) {
+				/*
+				==>
+				*/
+				pos_x += 2;
+			}
 
-		else if (ch == 75) {
-			/*
-			<==
-			*/
-			pos_x -= 2;
-		}
-		else if (ch == 80) {
-			/*
-			||
-			||
-			||
-			/\
-			/\
-			/\
-			payyn
-			*/
-			pos_y += 2;
-		}
+			else if (ch == 75) {
+				/*
+				<==
+				*/
+				pos_x -= 2;
+			}
+			else if (ch == 80) {
+				/*
+				||
+				||
+				||
+				/\
+				/\
+				/\
+				payyn
+				*/
+				pos_y += 2;
+			}
 
-		else if (ch == 72) {
-			/*
-			/\
-			/\
-			/\
-			||
-			||
-			||
-			||
-			bala
-			*/
-			pos_y -= 2;
-		}
-
+			else if (ch == 72) {
+				/*
+				/\
+				/\
+				/\
+				||
+				||
+				||
+				||
+				bala
+				*/
+				pos_y -= 2;
+			}
+		/*
+		else
+		{
+		*/
+			switch (ch)
+			{
+			case 97:
+				pos_x -= 2;
+				break;
+			case 115:
+				pos_y += 2;
+				break;
+			case 100:
+				pos_x += 2;
+				break;
+			case 119:
+				pos_y -= 2;
+				break;
+			default:
+				break;
+			}
+		//}
+			
 		//else break;
 		if (pos_x < 0) {
 			pos_x = 1;
