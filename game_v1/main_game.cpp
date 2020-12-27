@@ -3,22 +3,16 @@
 #include <conio.h>
 #include <time.h>
 //#include <ctime>
-//baray seri baad 
+// moshkel (#include <ctime>)  hal she
 // 0- vasat chin kardan jadval
 //0.1-khaneh hay jadval bozog shavad
-//1- pos_x , pos_y az halat gelobal be local avaz shavad
-//2- barasi shvad ke dar khane magsad mohrei nabashad 
-// 3- moshkel (#include <ctime>)  hal she
-//KEY BOARD 1 CHECK SHAVAD
-//
+//functional sazy va fayl sazi
 const int back_color = 15;
 const int font_color = 0;
 const char star = '*';
 const char number = '#';
 const int star_c = 4;
 const int number_c = 9;
-int pos_x;
-int pos_y;
 void gotoxy1(int, int);
 void sleep(unsigned int mseconds) {
 	clock_t goal = mseconds + clock();
@@ -136,6 +130,15 @@ void start_p2(int state[][25], int mohreh_dar_aval[7], int n) {
 		}
 	}
 }
+int barrasi_magsad(int x, int y,const int state[][25]) {
+	x--;
+	y--;
+	x /= 2; 
+	y /= 2;
+	if (state[x][y] == 0)
+		return 1;
+	return 0;
+}
 void gotoxy1(int x, int y) {
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD cursorCoord;
@@ -148,49 +151,7 @@ void gotoxy2(int x, int y)
 	COORD p = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p);
 }
-void move_with_keyboard2(int n,int &pos1_x,int &pos1_y) {
-	char ch;
-	do
-	{
-		ch = _getch();
-		switch (ch)
-		{
-		case 97:
-			pos_x-=2;
-			break;
-		case 115:
-			pos_y+=2;
-			break;
-		case 100:
-			pos_x+=2;
-			break;
-		case 119:
-			pos_y-=2;
-			break;
-		   default:	  
-			break;
-		}
-		if (pos_x < 0) {
-			pos_x = 1;
-		}
-		if (pos_y < 0)
-		{
-			pos_y = 1;
-		}
-		if (pos_x>2*n)
-		{
-			pos_x = 2 * n-1;
-		}
-		if (pos_y > 2 * n)
-		{
-			pos_y = 2 * n-1;
-		}
-		gotoxy2(pos_x, pos_y);
-		pos1_x = pos_x;
-		pos1_y = pos_y;
-	} while (ch!=13);
-}
-void move_with_keyboard1(int n, int& pos1_x, int& pos1_y) {
+void move_with_keyboard1(int n, int& pos1_x, int& pos1_y,int &pos_x,int &pos_y) {
 	char ch;
 	do
 	{
@@ -198,48 +159,23 @@ void move_with_keyboard1(int n, int& pos1_x, int& pos1_y) {
 		if (ch == 0 || ch == 224) 
 			ch = _getch();
 			if (ch == 77) {
-				/*
-				==>
-				*/
+				/*==>*/
 				pos_x += 2;
 			}
 
 			else if (ch == 75) {
-				/*
-				<==
-				*/
+				/*<==*/
 				pos_x -= 2;
 			}
 			else if (ch == 80) {
-				/*
-				||
-				||
-				||
-				/\
-				/\
-				/\
-				payyn
-				*/
+				/*payyn*/
 				pos_y += 2;
 			}
 
 			else if (ch == 72) {
-				/*
-				/\
-				/\
-				/\
-				||
-				||
-				||
-				||
-				bala
-				*/
+				/*bala*/
 				pos_y -= 2;
 			}
-		/*
-		else
-		{
-		*/
 			switch (ch)
 			{
 			case 97:
@@ -257,8 +193,6 @@ void move_with_keyboard1(int n, int& pos1_x, int& pos1_y) {
 			default:
 				break;
 			}
-		//}
-			
 		//else break;
 		if (pos_x < 0) {
 			pos_x = 1;
@@ -302,11 +236,13 @@ int check(int player,int pos1_x,int pos1_y,int state[][25]) {
 		return 1;
 	return 0;
 }
-void update_arry(int player, int pos1_x, int pos1_y, int state[][25]) {
+void update_arry(int player, int pos1_x, int pos1_y,int pos_x,int pos_y, int state[][25]) {
 	state[((pos1_x+1)/2)-1][((pos1_y+1)/2)-1] = 0;
 	state[((pos_x+1)/2)-1][((pos_y)/2)] = player;
 }
 int main() {
+	int pos_x;
+	int pos_y;
 	int n=16;
 	setTextColor(font_color, back_color);
 	system("cls");
@@ -340,11 +276,11 @@ int main() {
 			pos_x = 1;
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
-			move_with_keyboard1(n, pos1_x, pos1_y);
-			move_with_keyboard1(n, pos_x, pos_y);
-			if (check(1, pos1_x, pos1_y,state) == 1) {
+			move_with_keyboard1(n, pos1_x, pos1_y,pos_x,pos_y);
+			move_with_keyboard1(n, pos_x, pos_y, pos_x, pos_y);
+			if (check(1, pos1_x, pos1_y,state) == 1 && barrasi_magsad(pos_x, pos_y, state) == 1) {
 				move(pos1_x, pos1_y, pos_x, pos_y, star, star_c);
-				update_arry(1, pos1_x, pos1_y, state);
+				update_arry(1, pos1_x, pos1_y, pos_x,pos_y,state);
 				turn = select_turn(turn, n);
 			}
 			else
@@ -363,11 +299,11 @@ int main() {
 			pos_x = 1;
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
-			move_with_keyboard1(n, pos1_x, pos1_y);
-			move_with_keyboard1(n, pos_x, pos_y);
-			if (check(2, pos1_x, pos1_y, state) == 1){
+			move_with_keyboard1(n, pos1_x, pos1_y, pos_x, pos_y);
+			move_with_keyboard1(n, pos_x, pos_y, pos_x, pos_y);
+			if (check(2, pos1_x, pos1_y, state) == 1 && barrasi_magsad(pos_x,pos_y,state)==1){
 				move(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
-				update_arry(2, pos1_x, pos1_y, state);
+				update_arry(2, pos1_x, pos1_y, pos_x, pos_y, state);
 				turn = select_turn(turn,n);
 			}
 			else
