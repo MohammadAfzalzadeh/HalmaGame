@@ -214,7 +214,7 @@ void move_with_keyboard1(int n, int& pos1_x, int& pos1_y,int &pos_x,int &pos_y) 
 		pos1_y = pos_y;
 	} while (ch != 13);
 }
-void move(int pos1_x,int pos1_y,int pos_x,int pos_y,char ch,int s_color) {
+void update_screen(int pos1_x,int pos1_y,int pos_x,int pos_y,char ch,int s_color) {
 	gotoxy2(pos1_x,pos1_y);
 	printf(" ");
 	gotoxy2(pos_x,pos_y);
@@ -229,10 +229,15 @@ int select_turn(int turn,int n) {
 		return 2;
 	return 1;
 }
-int check(int player,int pos1_x,int pos1_y,int state[][25]) {
+int barasi_mada(int player,int pos1_x,int pos1_y, const int state[][25]) {
 	pos1_x = (pos1_x - 1) / 2;
 	pos1_y = (pos1_y - 1) / 2;
 	if (state[pos1_x][pos1_y] == player)
+		return 1;
+	return 0;
+}
+int check(int player, int pos1_x, int pos1_y, int x,int y, const int state[][25]) {
+	if (barrasi_magsad(x, y, state) == 1 && barasi_mada(player, pos1_x, pos1_y, state) == 1)
 		return 1;
 	return 0;
 }
@@ -278,8 +283,8 @@ int main() {
 			gotoxy2(pos_x, pos_y);
 			move_with_keyboard1(n, pos1_x, pos1_y,pos_x,pos_y);
 			move_with_keyboard1(n, pos_x, pos_y, pos_x, pos_y);
-			if (check(1, pos1_x, pos1_y,state) == 1 && barrasi_magsad(pos_x, pos_y, state) == 1) {
-				move(pos1_x, pos1_y, pos_x, pos_y, star, star_c);
+			if (check(1, pos1_x, pos1_y,pos_x,pos_y,state) == 1 ) {
+				update_screen(pos1_x, pos1_y, pos_x, pos_y, star, star_c);
 				update_arry(1, pos1_x, pos1_y, pos_x,pos_y,state);
 				turn = select_turn(turn, n);
 			}
@@ -301,8 +306,8 @@ int main() {
 			gotoxy2(pos_x, pos_y);
 			move_with_keyboard1(n, pos1_x, pos1_y, pos_x, pos_y);
 			move_with_keyboard1(n, pos_x, pos_y, pos_x, pos_y);
-			if (check(2, pos1_x, pos1_y, state) == 1 && barrasi_magsad(pos_x,pos_y,state)==1){
-				move(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
+			if (check(2, pos1_x, pos1_y, pos_x, pos_y, state) == 1){
+				update_screen(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
 				update_arry(2, pos1_x, pos1_y, pos_x, pos_y, state);
 				turn = select_turn(turn,n);
 			}
