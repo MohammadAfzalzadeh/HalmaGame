@@ -23,6 +23,7 @@ void setTextColor(int textColor, int backColor ) {
 	int colorAttribute = backColor << 4 | textColor;
 	SetConsoleTextAttribute(consoleHandle, colorAttribute);
 }
+///start.h
 void printTable(int n,int state[][25]) {
 	int i,j;
 	system("cls");
@@ -77,6 +78,7 @@ void printTable(int n,int state[][25]) {
 		}
 	}
 }
+//start.h
 void start_p1( int state[][25], int mohreh_dar_aval[7]) {
 	for (int i = 0; i < 7; i++)
 	{
@@ -104,6 +106,7 @@ void start_p1( int state[][25], int mohreh_dar_aval[7]) {
 		}
 	}
 }
+//start.h
 void start_p2(int state[][25], int mohreh_dar_aval[7], int n) {
 	for (int i = 0; i < 7; i++)
 	{
@@ -130,6 +133,7 @@ void start_p2(int state[][25], int mohreh_dar_aval[7], int n) {
 		}
 	}
 }
+//role.h
 int barrasi_magsad(int x, int y,const int state[][25]) {
 	x--;
 	y--;
@@ -151,69 +155,83 @@ void gotoxy2(int x, int y)
 	COORD p = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p);
 }
+//move.h
+void arrow_key(char ch,int& pos_x, int& pos_y) {
+	if (ch == 0 || ch == 224)
+		ch = _getch();
+	if (ch == 77) {
+		/*==>*/
+		pos_x += 2;
+	}
+
+	else if (ch == 75) {
+		/*<==*/
+		pos_x -= 2;
+	}
+	else if (ch == 80) {
+		/*payyn*/
+		pos_y += 2;
+	}
+
+	else if (ch == 72) {
+		/*bala*/
+		pos_y -= 2;
+	}
+}
+//move.h
+void WSAD_key(char ch, int& pos_x, int& pos_y) {
+	switch (ch)
+	{
+	case 97:
+		pos_x -= 2;
+		break;
+	case 115:
+		pos_y += 2;
+		break;
+	case 100:
+		pos_x += 2;
+		break;
+	case 119:
+		pos_y -= 2;
+		break;
+	default:
+		break;
+	}
+}
+//move.h
+void check_couecer_in_table(int n, int& pos_x, int& pos_y){
+	if (pos_x < 0) {
+		pos_x = 1;
+	}
+	if (pos_y < 0)
+	{
+		pos_y = 1;
+	}
+	if (pos_x > 2 * n)
+	{
+		pos_x = 2 * n - 1;
+	}
+	if (pos_y > 2 * n)
+	{
+		pos_y = 2 * n - 1;
+	}
+}
+//move.h
 void move_with_keyboard1(int n, int& pos1_x, int& pos1_y,int &pos_x,int &pos_y) {
 	char ch;
 	do
 	{
 		ch = _getch();
-		if (ch == 0 || ch == 224) 
-			ch = _getch();
-			if (ch == 77) {
-				/*==>*/
-				pos_x += 2;
-			}
-
-			else if (ch == 75) {
-				/*<==*/
-				pos_x -= 2;
-			}
-			else if (ch == 80) {
-				/*payyn*/
-				pos_y += 2;
-			}
-
-			else if (ch == 72) {
-				/*bala*/
-				pos_y -= 2;
-			}
-			switch (ch)
-			{
-			case 97:
-				pos_x -= 2;
-				break;
-			case 115:
-				pos_y += 2;
-				break;
-			case 100:
-				pos_x += 2;
-				break;
-			case 119:
-				pos_y -= 2;
-				break;
-			default:
-				break;
-			}
+		arrow_key(ch, pos_x, pos_y);
+		WSAD_key(ch, pos_x, pos_y);
 		//else break;
-		if (pos_x < 0) {
-			pos_x = 1;
-		}
-		if (pos_y < 0)
-		{
-			pos_y = 1;
-		}
-		if (pos_x > 2 * n)
-		{
-			pos_x = 2 * n - 1;
-		}
-		if (pos_y > 2 * n)
-		{
-			pos_y = 2 * n - 1;
-		}
+		check_couecer_in_table(n, pos_x, pos_y);
 		gotoxy2(pos_x, pos_y);
 		pos1_x = pos_x;
 		pos1_y = pos_y;
 	} while (ch != 13);
 }
+//screan.h
 void update_screen(int pos1_x,int pos1_y,int pos_x,int pos_y,char ch,int s_color) {
 	gotoxy2(pos1_x,pos1_y);
 	printf(" ");
@@ -222,6 +240,7 @@ void update_screen(int pos1_x,int pos1_y,int pos_x,int pos_y,char ch,int s_color
 	printf("%c",ch);
 	setTextColor(font_color, back_color);
 }
+//role.h
 int select_turn(int turn,int n) {
 	gotoxy2(0, 2 * n+2);
 	printf("              ");
@@ -229,6 +248,7 @@ int select_turn(int turn,int n) {
 		return 2;
 	return 1;
 }
+//role.h
 int barasi_mada(int player,int pos1_x,int pos1_y, const int state[][25]) {
 	pos1_x = (pos1_x - 1) / 2;
 	pos1_y = (pos1_y - 1) / 2;
@@ -236,6 +256,7 @@ int barasi_mada(int player,int pos1_x,int pos1_y, const int state[][25]) {
 		return 1;
 	return 0;
 }
+//role.h
 int check(int player, int pos1_x, int pos1_y, int x,int y, const int state[][25]) {
 	if (barrasi_magsad(x, y, state) == 1 && barasi_mada(player, pos1_x, pos1_y, state) == 1)
 		return 1;
@@ -245,13 +266,47 @@ void update_arry(int player, int pos1_x, int pos1_y,int pos_x,int pos_y, int sta
 	state[((pos1_x+1)/2)-1][((pos1_y+1)/2)-1] = 0;
 	state[((pos_x+1)/2)-1][((pos_y)/2)] = player;
 }
+//screan.h
+void clear_screan_to_show_masg(int n){
+	gotoxy2(0, 2 * n + 1);
+	for (int i = 0; i < 200; i++)
+		printf(" ");
+	gotoxy2(0, 2 * n + 1);
+}
+//screan.h
+void showStatus(const int n,int player ,int validation) {
+	static int i = 0;
+	if (validation==1)
+	{
+		if (i != 0)
+			i--;
+		if (i > 0)
+			return;
+		clear_screan_to_show_masg(n);
+		if (player == 1)
+			printf("bazi nobate %c ast", star);
+		else
+			printf("bazi nobate %c ast", number);
+		
+		
+	}
+	else
+	{
+		clear_screan_to_show_masg(n);
+		if (player == 1)
+			printf("harkat gabel gabol nist\ndo bare %c bazi konad ", star);
+		else
+			printf("harkat gabel gabol nist\ndo bare %c bazi konad", number);
+		i = 2;
+	}
+}
 int main() {
 	int pos_x;
 	int pos_y;
-	int n=16;
+	const int n=20;
 	setTextColor(font_color, back_color);
 	system("cls");
-	scanf("%d",&n);
+	//scanf("%d",&n);
 	int state[25][25] = { {0} };//tol arayeh eslsh shvad
 	int mohreh_dar_aval[7];
 	mohreh_dar_aval[0] = 1;
@@ -274,10 +329,11 @@ int main() {
 	{
 		if (turn==1)
 		{
-			pos_x = 0;
+			/*pos_x = 0;
 			pos_y = 2 * n + 1;
 			gotoxy2(pos_x, pos_y);
-			printf("%c",star);
+			printf("%c",star);*/
+			showStatus(n, 1, 1);
 			pos_x = 1;
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
@@ -290,17 +346,13 @@ int main() {
 			}
 			else
 			{
-				gotoxy2(0, 2 * n + 2);
-				printf("invalid move");
+				showStatus(n, 1, 0);
 			}
 			gotoxy2(pos_x, pos_y);
 		}
 		if (turn == 2)
 		{
-			pos_x = 0;
-			pos_y = 2 * n + 1;
-			gotoxy2(pos_x, pos_y);
-			printf("%c", number);
+			showStatus(n, 2, 1);
 			pos_x = 1;
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
@@ -313,8 +365,7 @@ int main() {
 			}
 			else
 			{
-				gotoxy2(0, 2 * n + 2);
-				printf("invalid move");
+				showStatus(n, 2, 0);
 			}
 			gotoxy2(pos_x, pos_y);
 		}
