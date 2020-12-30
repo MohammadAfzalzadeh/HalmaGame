@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <conio.h>
 #include <time.h>
+#include"a.h"
 //#include <ctime>
 // moshkel (#include <ctime>)  hal she
 // 0- vasat chin kardan jadval
