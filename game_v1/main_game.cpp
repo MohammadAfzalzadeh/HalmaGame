@@ -339,6 +339,7 @@ int main() {
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
 			move_with_keyboard1(n, pos1_x, pos1_y,pos_x,pos_y);
+			unlit(pos1_x,pos1_y,star_c);
 			move_with_keyboard1(n, pos_x, pos_y, pos_x, pos_y);
 			if (check(1, pos1_x, pos1_y,pos_x,pos_y,state) == 1 ) {
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, star, star_c);
@@ -358,6 +359,7 @@ int main() {
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
 			move_with_keyboard1(n, pos1_x, pos1_y, pos_x, pos_y);
+			unlit(pos1_x,pos1_y,number_c);
 			move_with_keyboard1(n, pos_x, pos_y, pos_x, pos_y);
 			if (check(2, pos1_x, pos1_y, pos_x, pos_y, state) == 1){
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
