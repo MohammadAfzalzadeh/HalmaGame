@@ -6,15 +6,15 @@
 
 #include"basickFunction.h"
 #include"start.h"
-#include"screan.h"
 #include"role.h"
+#include"screan.h"
 #include"move.h"
 
 //#include <ctime>
 // moshkel (#include <ctime>)  hal she
 // 0- vasat chin kardan jadval
 //0.1-khaneh hay jadval bozog shavad
-//functional sazy va fayl sazi
+
 
 const int back_color = 15;
 const int font_color = 0;
@@ -40,7 +40,7 @@ int main() {
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
 			move_with_keyboard1(n, pos1_x, pos1_y,pos_x,pos_y);
-			lite(pos1_x,pos1_y,star_c,star);
+			lite(pos1_x,pos1_y,star_c,star,state);
 			move_with_keyboard1(n, pos_x, pos_y, pos_x, pos_y);
 			if (check_role(1, pos1_x, pos1_y,pos_x,pos_y,state) == 1 ) {
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, star, star_c);
@@ -59,7 +59,7 @@ int main() {
 			pos_y = 2 * n - 1;
 			gotoxy2(pos_x, pos_y);
 			move_with_keyboard1(n, pos1_x, pos1_y, pos_x, pos_y);
-			lite(pos1_x,pos1_y,number_c,number);
+			lite(pos1_x,pos1_y,number_c,number, state);
 			move_with_keyboard1(n, pos_x, pos_y, pos_x, pos_y);
 			if (check_role(2, pos1_x, pos1_y, pos_x, pos_y, state) == 1){
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, number, number_c);

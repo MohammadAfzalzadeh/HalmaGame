@@ -42,9 +42,18 @@ void showStatus(const int n, int player, int validation) {
 		i = 2;
 	}
 }
-void lite(int pos_x, int pos_y, int color_s ,char ch) {
-	gotoxy2(pos_x, pos_y);
-	setTextColor(color_s, 6);
-	printf("%c", ch);
-	gotoxy2(pos_x, pos_y);
+void lite(int pos_x, int pos_y, int color_s, char ch, const int state[][25]) {
+	int player;
+	if (ch == '*')
+		 player = 1;
+	else
+		player = 2;
+	int check_mabda = barasi_mada(player, pos_x, pos_y, state);
+	if ( check_mabda== 1){
+		gotoxy2(pos_x, pos_y);
+		setTextColor(color_s, 6);
+		printf("%c", ch);
+		gotoxy2(pos_x, pos_y);
+	}
+	
 }
