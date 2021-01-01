@@ -1,4 +1,5 @@
 #pragma once
+//
 void gotoxy1(int x, int y) {
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD cursorCoord;
