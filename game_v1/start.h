@@ -1,5 +1,6 @@
 #pragma once
 extern const int back_color, font_color;
+//chap jadval bazi dar val baestefadeh az por shodan arry
 void printTable(int n, int state[][25]) {
 	int i, j;
 	system("cls");
@@ -54,7 +55,7 @@ void printTable(int n, int state[][25]) {
 		}
 	}
 }
-
+// baestefadeh az maghadir arry mohreh dar avl ke dar tabe start set mishe arry asli(state) ra bary nafar avl por mikonad
 void start_p1(int state[][25], int mohreh_dar_aval[7]) {
 	for (int i = 0; i < 7; i++)
 	{
@@ -82,7 +83,7 @@ void start_p1(int state[][25], int mohreh_dar_aval[7]) {
 		}
 	}
 }
-
+// baestefadeh az maghadir arry mohreh dar avl ke dar tabe start set mishe arry asli(state) ra bary nafar dowom por mikonad
 void start_p2(int state[][25], int mohreh_dar_aval[7], int n) {
 	for (int i = 0; i < 7; i++)
 	{
@@ -109,6 +110,7 @@ void start_p2(int state[][25], int mohreh_dar_aval[7], int n) {
 		}
 	}
 }
+// eghdatat avaliyeh bazi(1-rang safhe bazi 2-farakhani start_p1 & start_p2 3-print table )
 void start(int mohreh_dar_aval[], int state[][25],int n) {
 	setTextColor(font_color, back_color);
 	system("cls");
