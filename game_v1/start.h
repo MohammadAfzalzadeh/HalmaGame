@@ -110,8 +110,18 @@ void start_p2(int state[][25], int mohreh_dar_aval[7], int n) {
 		}
 	}
 }
-// eghdatat avaliyeh bazi(1-rang safhe bazi 2-farakhani start_p1 & start_p2 3-print table )
-void start(int mohreh_dar_aval[], int state[][25],int n) {
+//copy kardan state royeh camp
+void CopyToCamp(const int state[][25], int camp[][25],int n) {
+	for (int i = 0; i < n; i++)
+	{
+		for (int j= 0; j < n; j++)
+		{
+			camp[i][j] = state[i][j];
+		}
+	}
+}
+// eghdatat avaliyeh bazi(1-rang safhe bazi 2-farakhani start_p1 & start_p2 3-print table 4-CopyToCamp )
+void start(int mohreh_dar_aval[], int state[][25],int n,int camp[][25]) {
 	setTextColor(font_color, back_color);
 	system("cls");
 	//scanf("%d",&n);
@@ -125,4 +135,5 @@ void start(int mohreh_dar_aval[], int state[][25],int n) {
 	start_p1(state, mohreh_dar_aval);
 	start_p2(state, mohreh_dar_aval, n);
 	printTable(n, state);
+	CopyToCamp(state, camp,n);
 }
