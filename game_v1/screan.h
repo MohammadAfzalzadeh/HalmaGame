@@ -41,7 +41,7 @@ void showStatus(const int n, int player, int validation) {
 
 
 	}
-	else
+	else if(validation==0)
 	{
 		clear_screan_to_show_masg(n);
 		if (player == 1)
@@ -49,6 +49,12 @@ void showStatus(const int n, int player, int validation) {
 		else
 			printf("Invalid move\nPalyer %c :repeat again ", number);
 		i = 2;
+	}
+	else
+	{
+		clear_screan_to_show_masg(n);
+		printf("end game %d",player);
+
 	}
 }
 // mohreh entekhab shode ra motemayez mikonad
@@ -68,6 +74,7 @@ void lite(int pos_x, int pos_y, int color_s, char ch, const int state[][25]) {
 	
 }
 // agar harkat galat bashad mohreh ra be halat aval bar migardanad
+//unlite kardan setare moshkel darehhhhhhhhhhhhhhh
 void unlite(int pos_x, int pos_y, int color_s, char ch, const int state[][25]) {
 	int player;
 	if (ch == '*')
