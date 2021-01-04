@@ -2,8 +2,7 @@
 #include <windows.h>
 #include <conio.h>
 #include <time.h>
-
-
+//ketab khane hae ezafe
 #include"basickFunction.h"
 #include"start.h"
 #include"role.h"
@@ -20,17 +19,22 @@ const char star = '*';
 const char number = '#';
 const int star_c = 4;
 const int number_c = 9;
+const int leave_camp = 9;
+int bazi_count = 0;
 
 int main() {
 	//tarig moteghyer ha
 	int pos_x=0, pos_y=0;
+	//baze tarif n moheme ke (8,24) bashe
 	const int n=20;
 	int state[25][25] = { {0} };//tol arayeh eslsh shvad
 	int mohreh_dar_aval[7];
+	int camp[25][25] = { 0 };
 	int pos1_x, pos1_y;
 	int turn=1;
+	int ps = 0;
 	//farakhni tabe start ta tvabe lazem az file start.h ra farakhni konad va mohasebat barayeh shoroe kar angam shvad 
-	start(mohreh_dar_aval, state, n);
+	start(mohreh_dar_aval, state, n,camp);
 	//halge angam bazi ke bayad ta zamany ke bazi edameh darad anjam shvad va fela shart etmam nadrad
 	do
 	{
@@ -52,6 +56,7 @@ int main() {
 			if (check_role(1, pos1_x, pos1_y,pos_x,pos_y,state) == 1 ) {
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, star, star_c);
 				update_arry(1, pos1_x, pos1_y, pos_x,pos_y,state);
+				ps = EndGame(n, camp, state, turn);
 				turn = select_turn(turn, n);
 			}
 			//harekt ghabeleh gaboll nabashad(1)
@@ -77,6 +82,7 @@ int main() {
 			if (check_role(2, pos1_x, pos1_y, pos_x, pos_y, state) == 1){
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
 				update_arry(2, pos1_x, pos1_y, pos_x, pos_y, state);
+				ps = EndGame(n, camp, state, turn);
 				turn = select_turn(turn,n);
 			}
 			//harekt ghabeleh gaboll nabashad(2)
@@ -86,8 +92,8 @@ int main() {
 				showStatus(n, 2, 0);
 			}
 		}
-	} while (true);
-	
+	} while (!ps);
+	showStatus(n, ps, 2);
 	gotoxy2(0,2*n+3);
 	return 0;
 }
