@@ -81,6 +81,8 @@ void unlite(int pos_x, int pos_y, int color_s, char ch, const int state[][25]) {
 		player = 1;
 	else
 		player = 2;
+	if (barasi_mada(player, pos_x, pos_y, state) == 0)
+		return;
 	gotoxy2(pos_x, pos_y);
 	setTextColor(color_s, back_color);
 	printf("%c", ch);
