@@ -59,7 +59,7 @@ int main() {
 			unlite_valid_move(i, validmove);
 			// koliyeh ghavanin harkat dar in shart check mishvad(baray 1) 
 			// fela barasi inke khane mabda dorst bashad va dar maghsad mohrehi nabashad
-			if (check_role(1, pos1_x, pos1_y,pos_x,pos_y,state) == 1 ) {
+			if (check_role(1, pos1_x, pos1_y,pos_x,pos_y,state,validmove,i) == 1 ) {
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, star, star_c);
 				update_arry(1, pos1_x, pos1_y, pos_x,pos_y,state);
 				ps = EndGame(n, camp, state, turn);
@@ -90,7 +90,7 @@ int main() {
 			unlite_valid_move(i, validmove);
 			// koliyeh ghavanin harkat dar in shart check mishvad(baray 2) 
 			// fela barasi inke khane mabda dorst bashad va dar maghsad mohrehi nabashad
-			if (check_role(2, pos1_x, pos1_y, pos_x, pos_y, state) == 1){
+			if (check_role(2, pos1_x, pos1_y, pos_x, pos_y, state, validmove, i) == 1){
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
 				update_arry(2, pos1_x, pos1_y, pos_x, pos_y, state);
 				ps = EndGame(n, camp, state, turn);

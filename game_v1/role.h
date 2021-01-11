@@ -2,14 +2,22 @@
 extern int bazi_count;
 extern const int leave_camp;
 // check mi konad ke dar arry dar magsad aya khali hast aghar khali bashad 1 ra bar mighardanad vaghar na 0 ra bar mi gardanad
-int barrasi_magsad(int x, int y, const int state[][25]) {
-	x--;
+int barrasi_magsad(int pos_x, int pos_y, const int state[][25],const int validmove[][20],int i) {
+	int x = 0, y = 0;
+	PosInScreanToArry(pos_x, pos_y, x, y);
+	for (int j = 0; j < i; j++)
+	{
+		if (validmove[0][j] == x && validmove[1][j] == y)
+			return 1;
+	}
+	return 0;
+	/*x--;
 	y--;
 	x /= 2;
 	y /= 2;
 	if (state[x][y] == 0)
 		return 1;
-	return 0;
+	return 0;*/
 }
 // dar sorat farakoni nobat ra avaz mikonad
 int select_turn(int turn, int n) {
@@ -30,8 +38,8 @@ int barasi_mada(int player, int pos1_x, int pos1_y, const int state[][25]) {
 	return 0;
 }
 //check mikonad ke aya gavanin harkat dorost hast ya na(fela barasi mabda va magsad)
-int check_role(int player, int pos1_x, int pos1_y, int x, int y, const int state[][25]) {
-	if (barrasi_magsad(x, y, state) == 1 && barasi_mada(player, pos1_x, pos1_y, state) == 1)
+int check_role(int player, int pos1_x, int pos1_y, int x, int y, const int state[][25],const int validmove[][20],int i) {
+	if (barrasi_magsad(x, y, state,validmove,i) == 1 && barasi_mada(player, pos1_x, pos1_y, state) == 1)
 		return 1;
 	return 0;
 }
@@ -300,4 +308,19 @@ void NormalJump (int pos_x, int pos_y,int n, int &i, const int state[][25], int 
 	}
 	x++;
 	y++;
+}
+int tasavi_khas() {
+	return 0;
+}
+void super_jump(int pos_x, int pos_y, int n, int& i, const int state[][25], int validmove[][20]) {
+	int x = 0, y = 0;
+	PosInScreanToArry(pos_x, pos_y, x, y);
+	//bala
+	//paein
+	//rast
+	//chap
+	//bala rast
+	//bala chap
+	//paein rast
+	//paein chap
 }
