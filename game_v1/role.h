@@ -111,3 +111,193 @@ int EndGame(int n, const int camp[][25], int state[][25], int player) {
 			return 0;
 	}
 }
+// kod hae marbot be normal jump &&&&&& normal move tamiz shavad 
+// moteghayer ha khosh nam shvand
+// az tabe  is_x_y_in_table(int x, int y ,int n)--> vojod in nogteh dar jadval estefadeh shvad
+void NormalMove (int pos_x, int pos_y,int n, int &i, const int state[][25], int validmove[][20]) {
+	//tabdil pos_x va pos_y be x va y dar gadval
+	int x=0, y=0;
+	i = 0;
+	PosInScreanToArry(pos_x, pos_y, x, y);
+	//rast
+	x++;
+	if (x >= 0 && x < n) {
+		if (state[x][y] == 0) {
+			validmove[0][i] = x;
+			validmove[1][i] = y;
+			i++;
+		}
+	}
+	x--;
+	//bala
+	y--;
+	if (y >= 0 && y < n) {
+		if (state[x][y] == 0) {
+			validmove[0][i] = x;
+			validmove[1][i] = y;
+			i++;
+		}
+	}
+	y++;
+	//chap
+	x--;
+	if (x >= 0 && x < n) {
+		if (state[x][y] == 0) {
+			validmove[0][i] = x;
+			validmove[1][i] = y;
+			i++;
+		}
+	}
+	x++;
+	//pain
+	y++;
+	if (y >= 0 && y < n) {
+		if (state[x][y] == 0) {
+			validmove[0][i] = x;
+			validmove[1][i] = y;
+			i++;
+		}
+	}
+	y--;
+	//bala rast
+	y--;
+	x++;
+	if (x >= 0 && x < n && y >= 0 && y < n) {
+		if (state[x][y] == 0) {
+			validmove[0][i] = x;
+			validmove[1][i] = y;
+			i++;
+		}
+	}
+	y++;
+	x--;
+	//bala chap
+	y--;
+	x--;
+	if (x >= 0 && x < n && y >= 0 && y < n) {
+		if (state[x][y] == 0) {
+			validmove[0][i] = x;
+			validmove[1][i] = y;
+			i++;
+		}
+	}	
+	y++;
+	x++;
+	///paien rast
+	x++;
+	y++;
+	if (x >= 0 && x < n && y >= 0 && y < n) {
+		if (state[x][y] == 0) {
+			validmove[0][i] = x;
+			validmove[1][i] = y;
+			i++;
+		}
+	}
+	x--;
+	y--;
+	//paein chap
+	y++;
+	x--;
+	if (x >= 0 && x < n && y >= 0 && y < n) {
+		if (state[x][y] == 0) {
+			validmove[0][i] = x;
+			validmove[1][i] = y;
+			i++;
+		}
+	}
+	x++;
+	y--;
+}
+void NormalJump (int pos_x, int pos_y,int n, int &i, const int state[][25], int validmove[][20]) {
+	//tabdil pos_x va pos_y be x va y dar gadval
+	int x = 0, y = 0;
+	PosInScreanToArry(pos_x, pos_y, x, y);
+	//rast
+	x++;
+	if (x >= 0 && x < n) {
+		if (state[x][y] != 0 && state[x+1][y]==0 && is_x_y_in_table(x+1,y,n)) {
+			validmove[0][i] = x+1;
+			validmove[1][i] = y;
+			i++;
+		}
+	}
+	x--;
+	//chap
+	x--;
+	if (x >= 0 && x < n) {
+		if (state[x][y] != 0 && state [x-1][y]==0 && is_x_y_in_table(x - 1, y, n)) {
+			validmove[0][i] = x - 1;
+			validmove[1][i] = y;
+			i++;
+		}
+	}
+	x++;
+	//bala
+	y--;
+	if (y >= 0 && y < n) {
+		if (state[x][y] != 0 && state[x][y-1]==0 && is_x_y_in_table(x , y - 1, n)) {
+			validmove[0][i] = x;
+			validmove[1][i] = y-1;
+			i++;
+		}
+	}
+	y++;
+	//payin
+	y++;
+	if (y >= 0 && y < n) {
+		if (state[x][y] != 0 && state[x][y+1]==0 && is_x_y_in_table(x , y + 1, n)) {
+			validmove[0][i] = x;
+			validmove[1][i] = y+1;
+			i++;
+		}
+	}
+	y--;
+	//payin rast
+	x++;
+	y++;
+	if (x >= 0 && x < n && y >= 0 && y < n) {
+		if (state[x][y] != 0 && state[x+1][y+1]==0 && is_x_y_in_table(x + 1, y+1, n)) {
+			validmove[0][i] = x+1;
+			validmove[1][i] = y + 1;
+			i++;
+		}
+	}
+	x--;
+	y--;
+	//payin chap
+	x--;
+	y++;
+	if (x >= 0 && x < n && y >= 0 && y < n) {
+		if (state[x][y] != 0 && state[x-1][y+1]==0 && is_x_y_in_table(x - 1, y + 1, n)) {
+			validmove[0][i] = x - 1;
+			validmove[1][i] = y + 1;
+			i++;
+		}
+	}
+	x++;
+	y--;
+	// bala rast
+	x++;
+	y--;
+	if (x >= 0 && x < n && y >= 0 && y < n) {
+		if (state[x][y] != 0 && state[x+1][y-1]==0 && is_x_y_in_table(x + 1, y-1, n)) {
+			validmove[0][i] = x + 1;
+			validmove[1][i] = y - 1;
+			i++;
+		}
+	}
+	x--;
+	y++;
+	//bala chap
+	x--;
+	y--;
+	if (x >= 0 && x < n && y >= 0 && y < n) {
+		if (state[x][y] != 0 && state[x-1][y-1]==0 && is_x_y_in_table(x - 1, y - 1, n)) {
+			validmove[0][i] = x - 1;
+			validmove[1][i] = y - 1;
+			i++;
+		}
+	}
+	x++;
+	y++;
+}
