@@ -88,3 +88,31 @@ void unlite(int pos_x, int pos_y, int color_s, char ch, const int state[][25]) {
 	printf("%c", ch);
 	gotoxy2(pos_x, pos_y);
 }
+///
+void lite_valid_move(int i, int validmave[][20]) {
+	int x, y, pos_x = 0, pos_y = 0;
+	for (int j = 0; j < i; j++)
+	{
+		x = validmave[0][j];
+		y = validmave[1][j];
+		ArryToPosInScrean(pos_x, pos_y, x, y);
+		gotoxy2(pos_x, pos_y);
+		setTextColor(0, 8);
+		printf(" ");
+		gotoxy2(pos_x, pos_y);
+	}
+}
+//
+void unlite_valid_move(int i, int validmave[][20]) {
+	int x, y, pos_x = 0, pos_y = 0;
+	for (int j = 0; j < i; j++)
+	{
+		x = validmave[0][j];
+		y = validmave[1][j];
+		ArryToPosInScrean(pos_x, pos_y, x, y);
+		gotoxy2(pos_x, pos_y);
+		setTextColor(0, back_color);
+		printf(" ");
+		gotoxy2(pos_x, pos_y);
+	}
+}
