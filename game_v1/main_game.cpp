@@ -12,14 +12,13 @@
 //#include <ctime>
 // moshkel (#include <ctime>)  hal she
 
-
 const int back_color = 15;
 const int font_color = 0;
 const char star = '*';
 const char number = '#';
 const int star_c = 4;
 const int number_c = 9;
-const int leave_camp = 9;
+const int leave_camp = 20;
 int bazi_count = 0;
 
 int main() {
@@ -30,8 +29,10 @@ int main() {
 	int state[25][25] = { {0} };//tol arayeh eslsh shvad
 	int mohreh_dar_aval[7];
 	int camp[25][25] = { 0 };
+	int validmove[2][20] = { -1 };
 	int pos1_x, pos1_y;
 	int turn=1;
+	int i = 0;
 	int ps = 0;
 	//farakhni tabe start ta tvabe lazem az file start.h ra farakhni konad va mohasebat barayeh shoroe kar angam shvad 
 	start(mohreh_dar_aval, state, n,camp);
@@ -49,8 +50,13 @@ int main() {
 			move_with_keyboard(n, pos1_x, pos1_y,pos_x,pos_y);
 			//motemayez kardan mohre shoro agar vogod dashdeh bashad
 			lite(pos1_x,pos1_y,star_c,star,state);
+			NormalMove(pos1_x, pos1_y, n, i, state, validmove);
+			NormalJump(pos1_x, pos1_y, n, i, state, validmove);
+			lite_valid_move(i, validmove);
+			gotoxy2(pos_x, pos_y);
 			//entekhabeh magsad
 			move_with_keyboard(n, pos_x, pos_y, pos_x, pos_y);
+			unlite_valid_move(i, validmove);
 			// koliyeh ghavanin harkat dar in shart check mishvad(baray 1) 
 			// fela barasi inke khane mabda dorst bashad va dar maghsad mohrehi nabashad
 			if (check_role(1, pos1_x, pos1_y,pos_x,pos_y,state) == 1 ) {
@@ -76,7 +82,12 @@ int main() {
 			gotoxy2(pos_x, pos_y);
 			move_with_keyboard(n, pos1_x, pos1_y, pos_x, pos_y);
 			lite(pos1_x,pos1_y,number_c,number, state);
+			NormalMove(pos1_x, pos1_y, n, i, state, validmove);
+			NormalJump(pos1_x, pos1_y, n, i, state, validmove);
+			lite_valid_move(i, validmove);
+			gotoxy2(pos_x, pos_y);
 			move_with_keyboard(n, pos_x, pos_y, pos_x, pos_y);
+			unlite_valid_move(i, validmove);
 			// koliyeh ghavanin harkat dar in shart check mishvad(baray 2) 
 			// fela barasi inke khane mabda dorst bashad va dar maghsad mohrehi nabashad
 			if (check_role(2, pos1_x, pos1_y, pos_x, pos_y, state) == 1){
