@@ -1,8 +1,18 @@
 #pragma once
 extern int bazi_count;
 extern const int leave_camp;
+const int rast = 1;
+const int chap = 2;
+const int bala = 3;
+const int paien = 4;
+const int bala_rast = 5;
+const int bala_chap = 6;
+const int paien_rast = 7;
+const int paien_chap = 8;
+
+//extern const int max_valid_move;
 // check mi konad ke dar arry dar magsad aya khali hast aghar khali bashad 1 ra bar mighardanad vaghar na 0 ra bar mi gardanad
-int barrasi_magsad(int pos_x, int pos_y, const int state[][25],const int validmove[][20],int i) {
+int barrasi_magsad(int pos_x, int pos_y, const int state[][25],const int validmove[][50],int i) {
 	int x = 0, y = 0;
 	PosInScreanToArry(pos_x, pos_y, x, y);
 	for (int j = 0; j < i; j++)
@@ -38,7 +48,7 @@ int barasi_mada(int player, int pos1_x, int pos1_y, const int state[][25]) {
 	return 0;
 }
 //check mikonad ke aya gavanin harkat dorost hast ya na(fela barasi mabda va magsad)
-int check_role(int player, int pos1_x, int pos1_y, int x, int y, const int state[][25],const int validmove[][20],int i) {
+int check_role(int player, int pos1_x, int pos1_y, int x, int y, const int state[][25],const int validmove[][50],int i) {
 	if (barrasi_magsad(x, y, state,validmove,i) == 1 && barasi_mada(player, pos1_x, pos1_y, state) == 1)
 		return 1;
 	return 0;
@@ -122,7 +132,7 @@ int EndGame(int n, const int camp[][25], int state[][25], int player) {
 // kod hae marbot be normal jump &&&&&& normal move tamiz shavad 
 // moteghayer ha khosh nam shvand
 // az tabe  is_x_y_in_table(int x, int y ,int n)--> vojod in nogteh dar jadval estefadeh shvad
-void NormalMove (int pos_x, int pos_y,int n, int &i, const int state[][25], int validmove[][20]) {
+void NormalMove (int pos_x, int pos_y,int n, int &i, const int state[][25], int validmove[][50]) {
 	//tabdil pos_x va pos_y be x va y dar gadval
 	int x=0, y=0;
 	i = 0;
@@ -216,47 +226,57 @@ void NormalMove (int pos_x, int pos_y,int n, int &i, const int state[][25], int 
 	x++;
 	y--;
 }
-void NormalJump (int pos_x, int pos_y,int n, int &i, const int state[][25], int validmove[][20]) {
+void NormalJump (int pos_x, int pos_y,int n, int &i, const int state[][25], int validmove[][50],int z=1) {
 	//tabdil pos_x va pos_y be x va y dar gadval
 	int x = 0, y = 0;
-	PosInScreanToArry(pos_x, pos_y, x, y);
+	if(z==1)
+		PosInScreanToArry(pos_x, pos_y, x, y);
+	else//(x==0)
+	{
+		x = pos_x;
+		y = pos_y;
+	}
 	//rast
 	x++;
-	if (x >= 0 && x < n) {
-		if (state[x][y] != 0 && state[x+1][y]==0 && is_x_y_in_table(x+1,y,n)) {
+	if (x >= 0 && x < n ) {
+		if (state[x][y] != 0 && state[x+1][y]==0 && is_x_y_in_table(x+1,y,n) && is_x_y_in_validmove(x+1,y,validmove,i)) {
 			validmove[0][i] = x+1;
 			validmove[1][i] = y;
 			i++;
+			NormalJump(x + 1, y, n, i, state, validmove, 0);
 		}
 	}
 	x--;
 	//chap
 	x--;
 	if (x >= 0 && x < n) {
-		if (state[x][y] != 0 && state [x-1][y]==0 && is_x_y_in_table(x - 1, y, n)) {
+		if (state[x][y] != 0 && state [x-1][y]==0 && is_x_y_in_table(x - 1, y, n) && is_x_y_in_validmove(x-1, y, validmove, i)) {
 			validmove[0][i] = x - 1;
 			validmove[1][i] = y;
 			i++;
+			NormalJump(x - 1, y, n, i, state, validmove, 0);
 		}
 	}
 	x++;
 	//bala
 	y--;
 	if (y >= 0 && y < n) {
-		if (state[x][y] != 0 && state[x][y-1]==0 && is_x_y_in_table(x , y - 1, n)) {
+		if (state[x][y] != 0 && state[x][y-1]==0 && is_x_y_in_table(x , y - 1, n) && is_x_y_in_validmove(x, y - 1, validmove, i)) {
 			validmove[0][i] = x;
 			validmove[1][i] = y-1;
 			i++;
+			NormalJump(x, y - 1, n, i, state, validmove, 0);
 		}
 	}
 	y++;
 	//payin
 	y++;
 	if (y >= 0 && y < n) {
-		if (state[x][y] != 0 && state[x][y+1]==0 && is_x_y_in_table(x , y + 1, n)) {
+		if (state[x][y] != 0 && state[x][y+1]==0 && is_x_y_in_table(x , y + 1, n) && is_x_y_in_validmove(x, y+1, validmove, i)) {
 			validmove[0][i] = x;
 			validmove[1][i] = y+1;
 			i++;
+			NormalJump(x, y + 1, n, i, state, validmove, 0);
 		}
 	}
 	y--;
@@ -264,22 +284,24 @@ void NormalJump (int pos_x, int pos_y,int n, int &i, const int state[][25], int 
 	x++;
 	y++;
 	if (x >= 0 && x < n && y >= 0 && y < n) {
-		if (state[x][y] != 0 && state[x+1][y+1]==0 && is_x_y_in_table(x + 1, y+1, n)) {
+		if (state[x][y] != 0 && state[x+1][y+1]==0 && is_x_y_in_table(x + 1, y+1, n) && is_x_y_in_validmove(x + 1, y + 1, validmove, i)) {
 			validmove[0][i] = x+1;
 			validmove[1][i] = y + 1;
 			i++;
+			NormalJump(x + 1, y + 1, n, i, state, validmove, 0);
 		}
 	}
 	x--;
 	y--;
-	//payin chap
+	//--payin chap
 	x--;
 	y++;
 	if (x >= 0 && x < n && y >= 0 && y < n) {
-		if (state[x][y] != 0 && state[x-1][y+1]==0 && is_x_y_in_table(x - 1, y + 1, n)) {
+		if (state[x][y] != 0 && state[x-1][y+1]==0 && is_x_y_in_table(x - 1, y + 1, n) && is_x_y_in_validmove(x - 1, y + 1, validmove, i)) {
 			validmove[0][i] = x - 1;
 			validmove[1][i] = y + 1;
 			i++;
+			NormalJump(x - 1, y + 1, n, i, state, validmove, 0);
 		}
 	}
 	x++;
@@ -288,10 +310,11 @@ void NormalJump (int pos_x, int pos_y,int n, int &i, const int state[][25], int 
 	x++;
 	y--;
 	if (x >= 0 && x < n && y >= 0 && y < n) {
-		if (state[x][y] != 0 && state[x+1][y-1]==0 && is_x_y_in_table(x + 1, y-1, n)) {
+		if (state[x][y] != 0 && state[x+1][y-1]==0 && is_x_y_in_table(x + 1, y-1, n) && is_x_y_in_validmove(x + 1, y - 1, validmove, i)) {
 			validmove[0][i] = x + 1;
 			validmove[1][i] = y - 1;
 			i++;
+			NormalJump(x + 1, y - 1, n, i, state, validmove, 0);
 		}
 	}
 	x--;
@@ -300,10 +323,11 @@ void NormalJump (int pos_x, int pos_y,int n, int &i, const int state[][25], int 
 	x--;
 	y--;
 	if (x >= 0 && x < n && y >= 0 && y < n) {
-		if (state[x][y] != 0 && state[x-1][y-1]==0 && is_x_y_in_table(x - 1, y - 1, n)) {
+		if (state[x][y] != 0 && state[x-1][y-1]==0 && is_x_y_in_table(x - 1, y - 1, n) && is_x_y_in_validmove(x - 1, y - 1, validmove, i)) {
 			validmove[0][i] = x - 1;
 			validmove[1][i] = y - 1;
 			i++;
+			NormalJump(x - 1, y - 1, n, i, state, validmove, 0);
 		}
 	}
 	x++;
@@ -312,10 +336,33 @@ void NormalJump (int pos_x, int pos_y,int n, int &i, const int state[][25], int 
 int tasavi_khas() {
 	return 0;
 }
-void super_jump(int pos_x, int pos_y, int n, int& i, const int state[][25], int validmove[][20]) {
+void super_jump(int pos_x, int pos_y, int n, int& i, const int state[][25], int validmove[][50]) {
 	int x = 0, y = 0;
 	PosInScreanToArry(pos_x, pos_y, x, y);
-	//bala
+	//up
+	int xe = x, ye = y, count = 0, ps = 1;
+	if (!state[x][y - 1])
+	{
+		do
+		{
+			ye--;
+			count++;
+			if (!is_x_y_in_table(xe, ye,n))
+				ps = 0;
+		} while (state[xe][ye]==0 && ps);
+		for (int i = 0; i < count && ps; i++)
+		{
+			ye--;
+			if (state[xe][ye])
+				ps = 0;
+		}
+		if (ps)
+		{
+			validmove[0][i] = xe;
+			validmove[1][i] = ye;
+			i++;
+		}
+	}
 	//paein
 	//rast
 	//chap

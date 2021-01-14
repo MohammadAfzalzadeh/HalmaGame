@@ -1,5 +1,5 @@
 #pragma once
-extern const int back_color, font_color,star_c,number_c;
+extern const int back_color, font_color,star_c,number_c, max_valid_move;
 extern const char star, number;
 //batavagoh be harkat mohreh ra gabega mikonad
 void update_screen(int pos1_x, int pos1_y, int pos_x, int pos_y, char ch, int s_color) {
@@ -89,7 +89,7 @@ void unlite(int pos_x, int pos_y, int color_s, char ch, const int state[][25]) {
 	gotoxy2(pos_x, pos_y);
 }
 ///
-void lite_valid_move(int i, int validmave[][20]) {
+void lite_valid_move(int i, int validmave[][50]) {
 	int x, y, pos_x = 0, pos_y = 0;
 	for (int j = 0; j < i; j++)
 	{
@@ -103,7 +103,7 @@ void lite_valid_move(int i, int validmave[][20]) {
 	}
 }
 //
-void unlite_valid_move(int i, int validmave[][20]) {
+void unlite_valid_move(int i, int validmave[][50]) {
 	int x, y, pos_x = 0, pos_y = 0;
 	for (int j = 0; j < i; j++)
 	{

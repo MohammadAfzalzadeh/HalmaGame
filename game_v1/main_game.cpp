@@ -19,6 +19,7 @@ const char number = '#';
 const int star_c = 4;
 const int number_c = 9;
 const int leave_camp = 20;
+const int max_valid_move = 50;
 int bazi_count = 0;
 
 int main() {
@@ -29,7 +30,7 @@ int main() {
 	int state[25][25] = { {0} };//tol arayeh eslsh shvad
 	int mohreh_dar_aval[7];
 	int camp[25][25] = { 0 };
-	int validmove[2][20] = { -1 };
+	int validmove[2][max_valid_move] = { -1 };
 	int pos1_x, pos1_y;
 	int turn=1;
 	int i = 0;
@@ -52,6 +53,7 @@ int main() {
 			lite(pos1_x,pos1_y,star_c,star,state);
 			NormalMove(pos1_x, pos1_y, n, i, state, validmove);
 			NormalJump(pos1_x, pos1_y, n, i, state, validmove);
+			//super_jump(pos1_x, pos1_y, n, i, state, validmove);
 			lite_valid_move(i, validmove);
 			gotoxy2(pos_x, pos_y);
 			//entekhabeh magsad

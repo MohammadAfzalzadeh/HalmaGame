@@ -37,3 +37,11 @@ int is_x_y_in_table(int x,int y,int n) {
 		return 0;
 	return 1;
 }
+int is_x_y_in_validmove(int x, int y, int validmove[][50],int i) {
+	for (int j = 0; j < i; j++)
+	{
+		if (validmove[0][j] == x && validmove[1][j] == y)
+			return 0;
+	}
+	return 1;
+}
