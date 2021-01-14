@@ -341,7 +341,7 @@ void super_jump(int pos_x, int pos_y, int n, int& i, const int state[][25], int 
 	PosInScreanToArry(pos_x, pos_y, x, y);
 	//up
 	int xe = x, ye = y, count = 0, ps = 1;
-	if (!state[x][y - 1])
+	if (!state[x][y - 1] && is_x_y_in_table(x, y - 1, n))
 	{
 		do
 		{
@@ -353,7 +353,7 @@ void super_jump(int pos_x, int pos_y, int n, int& i, const int state[][25], int 
 		for (int i = 0; i < count && ps; i++)
 		{
 			ye--;
-			if (state[xe][ye])
+			if (state[xe][ye] || !is_x_y_in_table(xe, ye, n))
 				ps = 0;
 		}
 		if (ps)
@@ -363,11 +363,181 @@ void super_jump(int pos_x, int pos_y, int n, int& i, const int state[][25], int 
 			i++;
 		}
 	}
-	//paein
-	//rast
-	//chap
-	//bala rast
-	//bala chap
-	//paein rast
-	//paein chap
+	//down
+	xe = x, ye = y, count = 0, ps = 1;
+	if (!state[x][y + 1] && is_x_y_in_table(x, y + 1, n))
+	{
+		do
+		{
+			ye++;
+			count++;
+			if (!is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		} while (!state[xe][ye] && ps);
+		for (int i = 0; i < count && ps; i++)
+		{
+			ye++;
+			if (state[xe][ye] || !is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		}
+		if (ps)
+		{
+			validmove[0][i] = xe;
+			validmove[1][i] = ye;
+			i++;
+		}
+	}
+	//right
+	xe = x, ye = y, count = 0, ps = 1;
+	if (!state[x + 1][y] && is_x_y_in_table(x + 1, y, n))
+	{
+		do
+		{
+			xe++;
+			count++;
+			if (!is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		} while (!state[xe][ye] && ps);
+		for (int i = 0; i < count && ps; i++)
+		{
+			xe++;
+			if (state[xe][ye] || !is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		}
+		if (ps)
+		{
+			validmove[0][i] = xe;
+			validmove[1][i] = ye;
+			i++;
+		}
+	}
+	//left
+	xe = x, ye = y, count = 0, ps = 1;
+	if (!state[x - 1][y] && is_x_y_in_table(x - 1, y, n))
+	{
+		do
+		{
+			xe--;
+			count++;
+			if (!is_x_y_in_table(xe, ye,n))
+				ps = 0;
+		} while (!state[xe][ye] && ps);
+		for (int i = 0; i < count && ps; i++)
+		{
+			xe--;
+			if (state[xe][ye] || !is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		}
+		if (ps)
+		{
+			validmove[0][i] = xe;
+			validmove[1][i] = ye;
+			i++;
+		}
+	}
+
+	//up right
+	xe = x, ye = y, count = 0 ,ps = 1;
+	if (!state[x + 1][y - 1] && is_x_y_in_table(x + 1, y - 1, n))
+	{
+		do
+		{
+			ye--;
+			xe++;
+			count++;
+			if (!is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		} while (!state[xe][ye] && ps);
+		for (int i = 0; i < count && ps; i++)
+		{
+			ye--;
+			xe++;
+			if (state[xe][ye] || !is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		}
+		if (ps)
+		{
+			validmove[0][i] = xe;
+			validmove[1][i] = ye;
+			i++;
+		}
+	}
+	//up left
+	xe = x, ye = y, count = 0 ,ps = 1;
+	if (!state[x - 1][y - 1] && is_x_y_in_table(x - 1, y - 1, n))
+	{
+		do
+		{
+			ye--;
+			xe--;
+			count++;
+			if (!is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		} while (!state[xe][ye] && ps);
+		for (int i = 0; i < count && ps; i++)
+		{
+			ye--;
+			xe--;
+			if (state[xe][ye] || !is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		}
+		if (ps)
+		{
+			validmove[0][i] = xe;
+			validmove[1][i] = ye;
+			i++;
+		}
+	}
+	//down right
+	xe = x, ye = y, count = 0 ,ps = 1;
+	if (!state[x + 1][y + 1] && is_x_y_in_table(x + 1, y + 1, n))
+	{
+		do
+		{
+			ye++;
+			xe++;
+			count++;
+			if (!is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		} while (!state[xe][ye] && ps);
+		for (int i = 0; i < count && ps; i++)
+		{
+			ye++;
+			xe++;
+			if (state[xe][ye] || !is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		}
+		if (ps)
+		{
+			validmove[0][i] = xe;
+			validmove[1][i] = ye;
+			i++;
+		}
+	}
+	//down left
+	xe = x, ye = y, count = 0 ,ps = 1;
+	if (!state[x - 1][y + 1] && is_x_y_in_table(x - 1, y + 1, n))
+	{
+		do
+		{
+			ye++;
+			xe--;
+			count++;
+			if (!is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		} while (!state[xe][ye] && ps);
+		for (int i = 0; i < count && ps; i++)
+		{
+			ye++;
+			xe--;
+			if (state[xe][ye] || !is_x_y_in_table(xe, ye, n))
+				ps = 0;
+		}
+		if (ps)
+		{
+			validmove[0][i] = xe;
+			validmove[1][i] = ye;
+			i++;
+		}
+	}
 }

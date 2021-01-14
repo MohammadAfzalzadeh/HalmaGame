@@ -53,7 +53,7 @@ int main() {
 			lite(pos1_x,pos1_y,star_c,star,state);
 			NormalMove(pos1_x, pos1_y, n, i, state, validmove);
 			NormalJump(pos1_x, pos1_y, n, i, state, validmove);
-			//super_jump(pos1_x, pos1_y, n, i, state, validmove);
+			super_jump(pos1_x, pos1_y, n, i, state, validmove);
 			lite_valid_move(i, validmove);
 			gotoxy2(pos_x, pos_y);
 			//entekhabeh magsad
@@ -86,6 +86,7 @@ int main() {
 			lite(pos1_x,pos1_y,number_c,number, state);
 			NormalMove(pos1_x, pos1_y, n, i, state, validmove);
 			NormalJump(pos1_x, pos1_y, n, i, state, validmove);
+			super_jump(pos1_x, pos1_y, n, i, state, validmove);
 			lite_valid_move(i, validmove);
 			gotoxy2(pos_x, pos_y);
 			move_with_keyboard(n, pos_x, pos_y, pos_x, pos_y);
