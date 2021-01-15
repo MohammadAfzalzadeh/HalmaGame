@@ -1,4 +1,5 @@
 #pragma once
+//extern int PPS;
 extern const int back_color, font_color,star_c,number_c, max_valid_move;
 extern const char star, number;
 //batavagoh be harkat mohreh ra gabega mikonad
@@ -19,7 +20,7 @@ void clear_screan_to_show_masg(int n) {
 	gotoxy2(0, 2 * n + 1);
 }
 // vazeiyat bazi ra dar paien jadval chop mikonad
-void showStatus(const int n, int player, int validation) {
+void showStatus(const int n, int player, int validation,int ENDDASTI=0) {
 	int color_s;
 	if (player == 1)
 		color_s = star_c;
@@ -50,11 +51,36 @@ void showStatus(const int n, int player, int validation) {
 			printf("Invalid move\nPalyer %c :repeat again ", number);
 		i = 2;
 	}
-	else
+	else if(validation==2)
 	{
 		clear_screan_to_show_masg(n);
-		printf("end game %d",player);
+		if (player == 3) {
+			setTextColor(13, back_color);
+			printf("the game is draw");
+		}
+		else
+		{
+			setTextColor(color_s,back_color);
+			printf("end game  and player %d win", player);
+		}
+		if (ENDDASTI == 1)
+			exit(0);
 
+	}
+	else if (validation == 3) {
+		char ch;
+		clear_screan_to_show_masg(n);
+		printf("The opponent has demanded a draw. Do you accept?(Y/N)");
+		do
+		{
+			ch = _getch();
+		} while (ch!='y' && ch != 'Y' && ch != 'N' && ch != 'n');
+		if (ch == 'y' || ch == 'Y')
+			showStatus(n, 3, 2,1);
+		else {
+			showStatus(n, player, 1);
+
+		}
 	}
 }
 // mohreh entekhab shode ra motemayez mikonad

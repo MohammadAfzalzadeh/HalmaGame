@@ -30,7 +30,8 @@ int main() {
 	int state[25][25] = { {0} };//tol arayeh eslsh shvad
 	int mohreh_dar_aval[7];
 	int camp[25][25] = { 0 };
-	int validmove[2][max_valid_move] = { -1 };
+	int validmove[2][max_valid_move] = { 0 };
+	int recentlymove[4][5] = { 0 };
 	int pos1_x, pos1_y;
 	int turn=1;
 	int i = 0;
@@ -48,7 +49,7 @@ int main() {
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
 			//entekhabeh moreh shoro
-			move_with_keyboard(n, pos1_x, pos1_y,pos_x,pos_y);
+			move_with_keyboard(n,1, pos1_x, pos1_y,pos_x,pos_y, recentlymove);
 			//motemayez kardan mohre shoro agar vogod dashdeh bashad
 			lite(pos1_x,pos1_y,star_c,star,state);
 			NormalMove(pos1_x, pos1_y, n, i, state, validmove);
@@ -57,13 +58,13 @@ int main() {
 			lite_valid_move(i, validmove);
 			gotoxy2(pos_x, pos_y);
 			//entekhabeh magsad
-			move_with_keyboard(n, pos_x, pos_y, pos_x, pos_y);
+			move_with_keyboard(n,1, pos_x, pos_y, pos_x, pos_y,recentlymove);
 			unlite_valid_move(i, validmove);
 			// koliyeh ghavanin harkat dar in shart check mishvad(baray 1) 
 			// fela barasi inke khane mabda dorst bashad va dar maghsad mohrehi nabashad
 			if (check_role(1, pos1_x, pos1_y,pos_x,pos_y,state,validmove,i) == 1 ) {
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, star, star_c);
-				update_arry(1, pos1_x, pos1_y, pos_x,pos_y,state);
+				update_arry(1, pos1_x, pos1_y, pos_x,pos_y,state, recentlymove);
 				ps = EndGame(n, camp, state, turn);
 				turn = select_turn(turn, n);
 			}
@@ -82,20 +83,20 @@ int main() {
 			pos_x = 2*n-1;
 			pos_y = 2 * n - 1;
 			gotoxy2(pos_x, pos_y);
-			move_with_keyboard(n, pos1_x, pos1_y, pos_x, pos_y);
+			move_with_keyboard(n,2, pos1_x, pos1_y, pos_x, pos_y, recentlymove);
 			lite(pos1_x,pos1_y,number_c,number, state);
 			NormalMove(pos1_x, pos1_y, n, i, state, validmove);
 			NormalJump(pos1_x, pos1_y, n, i, state, validmove);
 			super_jump(pos1_x, pos1_y, n, i, state, validmove);
 			lite_valid_move(i, validmove);
 			gotoxy2(pos_x, pos_y);
-			move_with_keyboard(n, pos_x, pos_y, pos_x, pos_y);
+			move_with_keyboard(n,2, pos_x, pos_y, pos_x, pos_y, recentlymove);
 			unlite_valid_move(i, validmove);
 			// koliyeh ghavanin harkat dar in shart check mishvad(baray 2) 
 			// fela barasi inke khane mabda dorst bashad va dar maghsad mohrehi nabashad
 			if (check_role(2, pos1_x, pos1_y, pos_x, pos_y, state, validmove, i) == 1){
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
-				update_arry(2, pos1_x, pos1_y, pos_x, pos_y, state);
+				update_arry(2, pos1_x, pos1_y, pos_x, pos_y, state, recentlymove);
 				ps = EndGame(n, camp, state, turn);
 				turn = select_turn(turn,n);
 			}

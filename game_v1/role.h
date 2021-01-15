@@ -1,14 +1,7 @@
 #pragma once
 extern int bazi_count;
 extern const int leave_camp;
-const int rast = 1;
-const int chap = 2;
-const int bala = 3;
-const int paien = 4;
-const int bala_rast = 5;
-const int bala_chap = 6;
-const int paien_rast = 7;
-const int paien_chap = 8;
+
 
 //extern const int max_valid_move;
 // check mi konad ke dar arry dar magsad aya khali hast aghar khali bashad 1 ra bar mighardanad vaghar na 0 ra bar mi gardanad
@@ -21,13 +14,6 @@ int barrasi_magsad(int pos_x, int pos_y, const int state[][25],const int validmo
 			return 1;
 	}
 	return 0;
-	/*x--;
-	y--;
-	x /= 2;
-	y /= 2;
-	if (state[x][y] == 0)
-		return 1;
-	return 0;*/
 }
 // dar sorat farakoni nobat ra avaz mikonad
 int select_turn(int turn, int n) {
