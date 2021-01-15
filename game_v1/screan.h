@@ -56,7 +56,7 @@ void showStatus(const int n, int player, int validation,int ENDDASTI=0) {
 		clear_screan_to_show_masg(n);
 		if (player == 3) {
 			setTextColor(13, back_color);
-			printf("the game is draw");
+			printf("This game ended without a winner");
 		}
 		else
 		{
@@ -69,6 +69,11 @@ void showStatus(const int n, int player, int validation,int ENDDASTI=0) {
 	}
 	else if (validation == 3) {
 		char ch;
+		int playerR;
+		if (player == 1)
+			playerR = 2;
+		else
+			playerR = 1;
 		clear_screan_to_show_masg(n);
 		printf("The opponent has demanded a draw. Do you accept?(Y/N)");
 		do
@@ -78,7 +83,7 @@ void showStatus(const int n, int player, int validation,int ENDDASTI=0) {
 		if (ch == 'y' || ch == 'Y')
 			showStatus(n, 3, 2,1);
 		else {
-			showStatus(n, player, 1);
+			showStatus(n, playerR, 1);
 
 		}
 	}
