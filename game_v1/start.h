@@ -122,6 +122,10 @@ void CopyToCamp(const int state[][25], int camp[][25],int n) {
 }
 // eghdatat avaliyeh bazi(1-rang safhe bazi 2-farakhani start_p1 & start_p2 3-print table 4-CopyToCamp )
 void start(int mohreh_dar_aval[], int state[][25],int n,int camp[][25]) {
+	//fullscreen
+	ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
+	//set title for console 
+	SetConsoleTitle("halma project");
 	setTextColor(font_color, back_color);
 	system("cls");
 	//scanf("%d",&n);
