@@ -102,6 +102,7 @@ int rang(char rang[30]){
     {
         return Light_Yellow;
     }
+	return -1;
 }
 
 void delet_start_spase(char str[]) {
