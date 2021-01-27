@@ -1,6 +1,5 @@
 #pragma once
 extern int bazi_count;
-extern const int leave_camp;
 
 
 //extern const int max_valid_move;
@@ -42,7 +41,7 @@ int check_role(int player, int pos1_x, int pos1_y, int x, int y, const int state
 //barasi inke kasi dar khane khod nabashad
 //bazgasht( 0 => hichi to nist//1=> 1 bakhteh//2=> 2 bakhteh//3=> hardo bakhtan)
 // in tabe khna tar shavad///
-int LeaveCampCheck(int n,int player, const int camp[][25], int state[][25]) {
+int LeaveCampCheck(int n,int player, const int camp[][25], int state[][25],int leave_camp) {
 	if (bazi_count < leave_camp - 1)
 		return 0;
 	int a , b ;
@@ -96,11 +95,11 @@ int VrodBeKhaneHrif(int player, const int state[][25], const int camp[][25],int 
 }
 // barasi inke bazi tamam shode ya na
 //return(barandeh or 0 or 3 tasavi);
-int EndGame(int n, const int camp[][25], int state[][25], int player) {
+int EndGame(int n, const int camp[][25], int state[][25], int player,int leave_camp) {
 	if (VrodBeKhaneHrif(player,state,camp,n)==1 )
 		return player;
-	int leave1 = LeaveCampCheck(n, 1, camp, state);
-	int leave2 = LeaveCampCheck(n, 2, camp, state);
+	int leave1 = LeaveCampCheck(n, 1, camp, state,leave_camp);
+	int leave2 = LeaveCampCheck(n, 2, camp, state,leave_camp);
 	if (leave1) {
 		if (leave2)
 			return 3;
