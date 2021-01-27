@@ -1,7 +1,8 @@
 #pragma once
+#include"read from config file .h"
 extern const int back_color, font_color;
 //chap jadval bazi dar val baestefadeh az por shodan arry
-void printTable(int n, int state[][25]) {
+void printTable(int n, int state[][25],int First_color,int second_color) {
 	int i, j;
 	system("cls");
 	for (i = 0; i <= n; i++)
@@ -37,11 +38,11 @@ void printTable(int n, int state[][25]) {
 				printf("%c", 186);
 				//mohreh ha
 				if (state[j][i] == 1) {
-					setTextColor(4, 15);
+					setTextColor(First_color, 15);
 					printf("*");
 				}
 				else if (state[j][i] == 2) {
-					setTextColor(9, 15);
+					setTextColor(second_color, 15);
 					printf("#");
 				}
 				else {//state[j][i]==0
@@ -121,14 +122,15 @@ void CopyToCamp(const int state[][25], int camp[][25],int n) {
 	}
 }
 // eghdatat avaliyeh bazi(1-rang safhe bazi 2-farakhani start_p1 & start_p2 3-print table 4-CopyToCamp )
-void start(int mohreh_dar_aval[], int state[][25],int n,int camp[][25]) {
+void start(int mohreh_dar_aval[], int state[][25],int &n,int camp[][25],int &leave_camp_value,int &First_color, int &Secend_color) {
 	//fullscreen
 	ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
 	//set title for console 
 	SetConsoleTitle("halma project");
 	setTextColor(font_color, back_color);
 	system("cls");
-	//scanf("%d",&n);
+	SetValueReadConfigFile(n, First_color, Secend_color, leave_camp_value, mohreh_dar_aval);
+	/*
 	mohreh_dar_aval[0] = 1;
 	mohreh_dar_aval[1] = 2;
 	mohreh_dar_aval[2] = 3;
@@ -136,8 +138,9 @@ void start(int mohreh_dar_aval[], int state[][25],int n,int camp[][25]) {
 	mohreh_dar_aval[4] = 5;
 	mohreh_dar_aval[5] = 6;
 	mohreh_dar_aval[6] = 5;
+	*/
 	start_p1(state, mohreh_dar_aval);
 	start_p2(state, mohreh_dar_aval, n);
-	printTable(n, state);
+	printTable(n, state,First_color,Secend_color);
 	CopyToCamp(state, camp,n);
 }
