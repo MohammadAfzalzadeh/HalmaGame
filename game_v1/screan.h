@@ -1,6 +1,6 @@
 #pragma once
 //extern int PPS;
-extern const int back_color, font_color,star_c,number_c, max_valid_move;
+extern const int back_color, font_color, max_valid_move;
 extern const char star, number;
 //batavagoh be harkat mohreh ra gabega mikonad
 void update_screen(int pos1_x, int pos1_y, int pos_x, int pos_y, char ch, int s_color) {
@@ -20,12 +20,10 @@ void clear_screan_to_show_masg(int n) {
 	gotoxy2(0, 2 * n + 1);
 }
 // vazeiyat bazi ra dar paien jadval chop mikonad
-void showStatus(const int n, int player, int validation,int ENDDASTI=0) {
-	int color_s;
-	if (player == 1)
-		color_s = star_c;
-	else
-		color_s = number_c;
+void showStatus(int n, int player, int validation,int player1_color,int player2_color,int ENDDASTI=0) {
+	int color_s = player2_color;
+	if(player==1)
+		color_s=player1_color;
 	setTextColor(color_s, back_color);
 	static int i = 0;
 	if (validation == 1)
@@ -81,9 +79,9 @@ void showStatus(const int n, int player, int validation,int ENDDASTI=0) {
 			ch = _getch();
 		} while (ch!='y' && ch != 'Y' && ch != 'N' && ch != 'n');
 		if (ch == 'y' || ch == 'Y')
-			showStatus(n, 3, 2,1);
+			showStatus(n, 3, 2,player1_color,player2_color,1);
 		else {
-			showStatus(n, playerR, 1);
+			showStatus(n, playerR, 1, player1_color, player2_color);
 
 		}
 	}
