@@ -2,15 +2,18 @@
 #include <windows.h>
 #include <conio.h>
 #include <time.h>
+#include<ctime>
+
 //ketab khane hae ezafe
 #include"basickFunction.h"
 #include"start.h"
 #include"role.h"
 #include"screan.h"
 #include"move.h"
-
-//#include <ctime>
-// moshkel (#include <ctime>)  hal she
+#include"main_menu.h"
+///menu
+//#include"menu/log in.h"
+//#include"menu/sign in.h"
 
 const int back_color = 15;
 const int font_color = 0;
@@ -21,6 +24,8 @@ int bazi_count = 0;
 
 int main() {
 	//tarig moteghyer ha
+	if (!menu())
+		exit(0);
 	int pos_x=0, pos_y=0;
 	//baze tarif n moheme ke (8,24) bashe
 	int n, star_c , number_c, leave_camp;
