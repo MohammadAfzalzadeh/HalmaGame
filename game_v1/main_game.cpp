@@ -11,9 +11,9 @@
 #include"screan.h"
 #include"move.h"
 #include"main_menu.h"
-///menu
-//#include"menu/log in.h"
-//#include"menu/sign in.h"
+#include"save_game.h"
+#include"nahveh_anjam_bazi.h"
+
 
 const int back_color = 15;
 const int font_color = 0;
@@ -39,7 +39,10 @@ int main() {
 	int i = 0;
 	int ps = 0;
 	//farakhni tabe start ta tvabe lazem az file start.h ra farakhni konad va mohasebat barayeh shoroe kar angam shvad 
-	start(mohreh_dar_aval, state, n,camp,leave_camp,star_c,number_c);
+	if (nahveh_bazi() == 1)
+		start(mohreh_dar_aval, state, n, camp, leave_camp, star_c, number_c);
+	else
+		ReadSaveGame(state, camp, recentlymove, star_c, number_c, leave_camp, n, turn, bazi_count);
 	//halge angam bazi ke bayad ta zamany ke bazi edameh darad anjam shvad va fela shart etmam nadrad
 	do
 	{
