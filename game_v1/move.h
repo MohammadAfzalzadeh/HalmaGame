@@ -1,4 +1,5 @@
 ﻿#pragma once
+
 extern int bazi_count;
 //harkat cursor aghar kelid jahaty bashad
 void arrow_key(char ch, int& pos_x, int& pos_y) {
@@ -100,7 +101,7 @@ int check_draw(int recentlymove[][5]) {
 	///////////////////////////////////
 }
 // tabe asli ke baes harkat cursor mishe ta fard ENTER bezanad on noghteh ra bar migar danad ba estefadeh az ( int& pos1_x, int& pos1_y)
-void move_with_keyboard(int n,int player, int& pos1_x, int& pos1_y, int& pos_x, int& pos_y, int recentlymove[][5],int player1_color,int player2_color) {
+void move_with_keyboard(int n,int player, int& pos1_x, int& pos1_y, int& pos_x, int& pos_y, int recentlymove[][5],int player1_color,int player2_color,int state[][25],int camp[][25],int leave_camp_value,int turn) {
 	char ch;
 	int playerR;
 	if (player == 1)
@@ -110,6 +111,8 @@ void move_with_keyboard(int n,int player, int& pos1_x, int& pos1_y, int& pos_x, 
 	do
 	{
 		ch = _getch();
+		if (ch == 27)
+			puase_menu(n,state,camp,recentlymove,player1_color,player2_color,leave_camp_value,turn,bazi_count);
 		arrow_key(ch, pos_x, pos_y);
 		WSAD_key(ch, pos_x, pos_y);
 		if (Q_key(ch)) {
