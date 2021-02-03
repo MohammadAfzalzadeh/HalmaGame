@@ -34,7 +34,7 @@ void saving_game(int size,int state[][max_arr],int camp[][max_arr], int recently
 	fwrite(&turn, sizeof(int), 1, outfile);
 	fwrite(&bazi_count, sizeof(int), 1, outfile);
 	fclose(outfile);
-	printf("the game saved :)");
+	printf("the game saved :)\n");
 	return;
 }
 
@@ -72,7 +72,7 @@ void ReadSaveGame(int state[][25], int camp[][25], int recentlymove[][5], int &p
 		fread(&camp[i], sizeof(int), max_arr, infile);
 	}
 	// write recentlymove in file
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		fread(&recentlymove[i], sizeof(int), 5, infile);
 	}
