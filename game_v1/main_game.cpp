@@ -17,7 +17,7 @@
 #include"nahveh_anjam_bazi.h"
 #include "AI.h"
 
-
+#include"my_exit.h"
 
 
 const int back_color = 15;
@@ -71,12 +71,12 @@ int main() {
 		//bazikon aval(*)
 		if (turn==1)
 		{
-			showStatus(n, 1, 1,star_c,number_c);
+			showStatus(n, 1, 1,star_c,number_c,name);
 			pos_x = 1;
 			pos_y = 1;
 			gotoxy2(pos_x, pos_y);
 			//entekhabeh moreh shoro
-			move_with_keyboard(n,1, pos1_x, pos1_y,pos_x,pos_y, recentlymove, star_c, number_c,state,camp,leave_camp,turn,is_comp);
+			move_with_keyboard(n,1, pos1_x, pos1_y,pos_x,pos_y, recentlymove, star_c, number_c,state,camp,leave_camp,turn,is_comp,name);
 			//motemayez kardan mohre shoro agar vogod dashdeh bashad
 			lite(pos1_x,pos1_y,star_c,star,state);
 			NormalMove(pos1_x, pos1_y, n, i, state, validmove);
@@ -85,7 +85,7 @@ int main() {
 			lite_valid_move(i, validmove);
 			gotoxy2(pos_x, pos_y);
 			//entekhabeh magsad
-			move_with_keyboard(n,1, pos_x, pos_y, pos_x, pos_y,recentlymove, star_c, number_c, state, camp, leave_camp, turn, is_comp);
+			move_with_keyboard(n,1, pos_x, pos_y, pos_x, pos_y,recentlymove, star_c, number_c, state, camp, leave_camp, turn, is_comp,name);
 			unlite_valid_move(i, validmove);
 			// koliyeh ghavanin harkat dar in shart check mishvad(baray 1) 
 			// fela barasi inke khane mabda dorst bashad va dar maghsad mohrehi nabashad
@@ -100,7 +100,7 @@ int main() {
 			{
 				//agaar harkat galat bashad mohreh entekhab shodeh ra be halat aval bar mi gardanad va payam monaseb ra chap mikonad
 				unlite(pos1_x, pos1_y, star_c, star, state);
-				showStatus(n, 1, 0, star_c, number_c);
+				showStatus(n, 1, 0, star_c, number_c,name);
 			}
 		}
 		//bazikon dovom(#)
@@ -108,7 +108,7 @@ int main() {
 		{
 			if (is_comp)
 			{
-				AI_move(pos1_x, pos1_y, pos_x, pos_y, star_c, number_c, n, state, camp, turn, recentlymove, leave_camp);
+				AI_move(pos1_x, pos1_y, pos_x, pos_y, star_c, number_c, n, state, camp, turn, recentlymove, leave_camp,name);
 				update_screen(pos1_x, pos1_y, pos_x, pos_y, number, number_c);
 				update_arry(2, pos1_x, pos1_y, pos_x, pos_y, state, recentlymove);
 				ps = EndGame(n, camp, state, turn, leave_camp);
@@ -116,18 +116,18 @@ int main() {
 			}
 			else
 			{
-				showStatus(n, 2, 1, star_c, number_c);
+				showStatus(n, 2, 1, star_c, number_c,name);
 				pos_x = 2 * n - 1;
 				pos_y = 2 * n - 1;
 				gotoxy2(pos_x, pos_y);
-				move_with_keyboard(n, 2, pos1_x, pos1_y, pos_x, pos_y, recentlymove, star_c, number_c, state, camp, leave_camp, turn, is_comp);
+				move_with_keyboard(n, 2, pos1_x, pos1_y, pos_x, pos_y, recentlymove, star_c, number_c, state, camp, leave_camp, turn, is_comp,name);
 				lite(pos1_x, pos1_y, number_c, number, state);
 				NormalMove(pos1_x, pos1_y, n, i, state, validmove);
 				NormalJump(pos1_x, pos1_y, n, i, state, validmove);
 				super_jump(pos1_x, pos1_y, n, i, state, validmove);
 				lite_valid_move(i, validmove);
 				gotoxy2(pos_x, pos_y);
-				move_with_keyboard(n, 2, pos_x, pos_y, pos_x, pos_y, recentlymove, star_c, number_c, state, camp, leave_camp, turn, is_comp);
+				move_with_keyboard(n, 2, pos_x, pos_y, pos_x, pos_y, recentlymove, star_c, number_c, state, camp, leave_camp, turn, is_comp,name);
 				unlite_valid_move(i, validmove);
 				// koliyeh ghavanin harkat dar in shart check mishvad(baray 2) 
 				// fela barasi inke khane mabda dorst bashad va dar maghsad mohrehi nabashad
@@ -141,12 +141,12 @@ int main() {
 				else
 				{
 					unlite(pos1_x, pos1_y, number_c, number, state);
-					showStatus(n, 2, 0, star_c, number_c);
+					showStatus(n, 2, 0, star_c, number_c,name);
 				}
 			}
 		}
 	} while (!ps);
-	showStatus(n, ps, 2, star_c, number_c);
+	showStatus(n, ps, 2, star_c, number_c,name);
 	gotoxy2(0,2*n+3);
 	return 0;
 }

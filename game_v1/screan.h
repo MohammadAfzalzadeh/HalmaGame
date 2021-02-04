@@ -1,4 +1,6 @@
 #pragma once
+#include"my_exit.h"
+#include"amar.h"
 //extern int PPS;
 extern const int back_color, font_color, max_valid_move;
 extern const char star, number;
@@ -20,7 +22,7 @@ void clear_screan_to_show_masg(int n) {
 	gotoxy2(0, 2 * n + 1);
 }
 // vazeiyat bazi ra dar paien jadval chop mikonad
-void showStatus(int n, int player, int validation,int player1_color,int player2_color,int is_comp=0,int ENDDASTI=0) {
+void showStatus(int n, int player, int validation,int player1_color,int player2_color,char name[],int is_comp=0,int ENDDASTI=0) {
 	int color_s = player2_color;
 	if(player==1)
 		color_s=player1_color;
@@ -55,11 +57,16 @@ void showStatus(int n, int player, int validation,int player1_color,int player2_
 		if (player == 3) {
 			setTextColor(13, back_color);
 			printf("This game ended without a winner");
+			my_exit(name, 2);
 		}
 		else
 		{
 			setTextColor(color_s,back_color);
 			printf("end game  and player %d win", player);
+			if(player==1)
+				my_exit(name, 1);
+			else 
+				my_exit(name, 0);
 		}
 		if (ENDDASTI == 1)
 			exit(0);
@@ -79,13 +86,13 @@ void showStatus(int n, int player, int validation,int player1_color,int player2_
 			if (random == 1) {
 				printf("Y");
 				//sleep
-				showStatus(n, 3, 2, player1_color, player2_color, 1);
+				showStatus(n, 3, 2, player1_color, player2_color,name, 1);
 			}
 			else
 			{
 				printf("N");
 				//sleep
-				showStatus(n, playerR, 1, player1_color, player2_color);
+				showStatus(n, playerR, 1, player1_color, player2_color, name);
 			}
 		}
 		else{
@@ -94,9 +101,9 @@ void showStatus(int n, int player, int validation,int player1_color,int player2_
 				ch = _getch();
 			} while (ch!='y' && ch != 'Y' && ch != 'N' && ch != 'n');
 			if (ch == 'y' || ch == 'Y')
-				showStatus(n, 3, 2,player1_color,player2_color,1);
+				showStatus(n, 3, 2,player1_color,player2_color, name,1);
 			else {
-				showStatus(n, playerR, 1, player1_color, player2_color);
+				showStatus(n, playerR, 1, player1_color, player2_color, name);
 
 			}
 		}//end else
