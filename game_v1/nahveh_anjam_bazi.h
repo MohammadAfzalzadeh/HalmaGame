@@ -8,20 +8,22 @@ int nahveh_bazi(char name[]) {
 		int answer, menu_count;
 		if (IsExistSaveFile()) {
 			printf("yek mored ra entekhab konid\n");
-			printf("1)bazi gadid\n");
-			printf("2)bazi ba save shodeh\n");
-			printf("3)show my statistics and best statistics and worst statistics\n");
-			printf("4)EXIT");
-			menu_count = 4;
+			printf("1)bazi gadid vs human\n");
+			printf("2)bazi gadid vs computer\n");
+			printf("3)bazi ba save shodeh\n");
+			printf("4)show my statistics and best statistics and worst statistics\n");
+			printf("5)EXIT");
+			menu_count = 5;
 			answer = move_with_keyboard_menu(menu_count);
 		}
 		else
 		{
 			printf("yek mored ra entekhab konid\n");
-			printf("1)bazi gadid\n");
-			printf("2)show my statistics and best statistics and worst statistics\n");
-			printf("3)EXIT");
-			menu_count = 3;
+			printf("1)bazi gadid vs human\n");
+			printf("2)bazi gadid vs computer\n");
+			printf("3)show my statistics and best statistics and worst statistics\n");
+			printf("4)EXIT");
+			menu_count = 4;
 			answer = move_with_keyboard_menu(menu_count);
 		}
 		if (answer == menu_count) {

@@ -20,7 +20,7 @@ void clear_screan_to_show_masg(int n) {
 	gotoxy2(0, 2 * n + 1);
 }
 // vazeiyat bazi ra dar paien jadval chop mikonad
-void showStatus(int n, int player, int validation,int player1_color,int player2_color,int ENDDASTI=0) {
+void showStatus(int n, int player, int validation,int player1_color,int player2_color,int is_comp=0,int ENDDASTI=0) {
 	int color_s = player2_color;
 	if(player==1)
 		color_s=player1_color;
@@ -74,16 +74,32 @@ void showStatus(int n, int player, int validation,int player1_color,int player2_
 			playerR = 1;
 		clear_screan_to_show_masg(n);
 		printf("The opponent has demanded a draw. Do you accept?(Y/N)");
-		do
-		{
-			ch = _getch();
-		} while (ch!='y' && ch != 'Y' && ch != 'N' && ch != 'n');
-		if (ch == 'y' || ch == 'Y')
-			showStatus(n, 3, 2,player1_color,player2_color,1);
-		else {
-			showStatus(n, playerR, 1, player1_color, player2_color);
-
+		if (is_comp) {
+			int random = rand() % 2;
+			if (random == 1) {
+				printf("Y");
+				//sleep
+				showStatus(n, 3, 2, player1_color, player2_color, 1);
+			}
+			else
+			{
+				printf("N");
+				//sleep
+				showStatus(n, playerR, 1, player1_color, player2_color);
+			}
 		}
+		else{
+			do
+			{
+				ch = _getch();
+			} while (ch!='y' && ch != 'Y' && ch != 'N' && ch != 'n');
+			if (ch == 'y' || ch == 'Y')
+				showStatus(n, 3, 2,player1_color,player2_color,1);
+			else {
+				showStatus(n, playerR, 1, player1_color, player2_color);
+
+			}
+		}//end else
 	}
 }
 // mohreh entekhab shode ra motemayez mikonad

@@ -8,11 +8,11 @@ int puase_menu_print() {
 	return(move_with_keyboard_menu(2));
 }
 
-void puase_menu(int size, int state[][25], int camp[][25], int recentlymove[][5], int player1_color, int player2_color, int leave_camp_value, int turn, int bazi_count) {
+void puase_menu(int size, int state[][25], int camp[][25], int recentlymove[][5], int player1_color, int player2_color, int leave_camp_value, int turn, int bazi_count,int is_comp) {
 	switch (puase_menu_print())
 	{
 	case 1:
-		saving_game(size, state, camp, recentlymove, player1_color, player2_color, leave_camp_value, turn, bazi_count);
+		saving_game(size, state, camp, recentlymove, player1_color, player2_color, leave_camp_value, turn, bazi_count,is_comp);
 		exit(1);
 	case 2:
 		exit(1);

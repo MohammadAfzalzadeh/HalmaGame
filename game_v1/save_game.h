@@ -1,6 +1,6 @@
 #pragma once
 const int max_arr = 25;
-void saving_game(int size,int state[][max_arr],int camp[][max_arr], int recentlymove[][5],int player1_color, int player2_color,int leave_camp_value,int turn,int bazi_count) {
+void saving_game(int size,int state[][max_arr],int camp[][max_arr], int recentlymove[][5],int player1_color, int player2_color,int leave_camp_value,int turn,int bazi_count ,int is_comp) {
 	FILE* outfile;
 	outfile = fopen("save_game.dat", "wb");
 	if (!outfile)
@@ -33,6 +33,7 @@ void saving_game(int size,int state[][max_arr],int camp[][max_arr], int recently
 	//write turn and bazi count
 	fwrite(&turn, sizeof(int), 1, outfile);
 	fwrite(&bazi_count, sizeof(int), 1, outfile);
+	fwrite(&is_comp, sizeof(int), 1, outfile);
 	fclose(outfile);
 	printf("the game saved :)\n");
 	return;
@@ -52,7 +53,7 @@ int IsExistSaveFile() {
 	return 0;
 }
 
-void ReadSaveGame(int state[][25], int camp[][25], int recentlymove[][5], int &player1_color, int &player2_color, int &leave_camp_value, int &size, int &turn, int &bazi_count) {
+void ReadSaveGame(int state[][25], int camp[][25], int recentlymove[][5], int &player1_color, int &player2_color, int &leave_camp_value, int &size, int &turn, int &bazi_count,int &is_comp) {
 	FILE* infile;
 	infile = fopen("save_game.dat", "rb");
 	if (!infile) {
@@ -84,5 +85,6 @@ void ReadSaveGame(int state[][25], int camp[][25], int recentlymove[][5], int &p
 	//write turn and bazi count
 	fread(&turn, sizeof(int), 1, infile);
 	fread(&bazi_count, sizeof(int), 1, infile);
+	fread(&is_comp, sizeof(int), 1, infile);
 	fclose(infile);
 }
