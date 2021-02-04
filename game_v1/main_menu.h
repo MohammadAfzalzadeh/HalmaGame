@@ -53,7 +53,7 @@ int move_with_keyboard_menu(int max_move){
 	} while (ch != 13);
     return y;
 }
-int menu(){
+int menu(char name[]){
 	while (1)
 	{
 		setTextColor(font_color, back_color);
@@ -63,7 +63,7 @@ int menu(){
 
 		if (answer == 1)
 		{
-			int log = log_in();
+			int log = log_in(name);
 			if (log)
 				return 1;
 

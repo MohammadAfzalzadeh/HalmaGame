@@ -1,20 +1,4 @@
 #pragma once
-//#include"../basickFunction.h"
-/*
-#include"main.h"
-#include<stdio.h>
-#include <windows.h>
-#include <conio.h>
-#include<string.h>
-#include<time.h>
-*/
-
-/*
-void sleep(unsigned int mseconds=10000) {
-    clock_t goal = mseconds + clock();
-    while (goal > clock());
-}
-*/
 
 void read_pas(char pass[]){
     char read_char;
@@ -25,8 +9,10 @@ void read_pas(char pass[]){
     {
         if((read_char >='A'&& read_char <= 'Z')||(read_char >='a'&& read_char <= 'z') ||(read_char >='0'&& read_char <= '9') ){
             printf("*");
-            printf("%c",read_char);
-            pass[count_char]=read_char-'0';
+			if(read_char=='0')
+				pass[count_char]=read_char;
+			else
+				pass[count_char] = read_char-'0';
             count_char++;
 			read_char = _getch();
         }
@@ -81,17 +67,19 @@ int search_in_file(char username[],char password[]){
     return 0;
 }
 
-int log_in(){
+int log_in(char name[]){
     system("cls");
     printf("                     Log In page    \n");
     //بعدا حواست به این باشه که ممکنه نام کاربری(یا رمز عبور) از آرایه بیرون بزنه
-    char username[100];
+	char username[100];
     char password[100];
     printf("enter your username:\n");
     gets_s(username);
     printf("enter your password:\n");
     read_pas(password);
     int s=search_in_file(username,password);
+	if (s)
+		strcpy(name, username);
     //sleep();
 	return s;    
 }
