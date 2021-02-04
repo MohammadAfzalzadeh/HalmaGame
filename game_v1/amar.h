@@ -17,20 +17,6 @@ void copy_my_struct_amar_player(amar_player &copy, amar_player &source) {
 	copy.draw_game = source.draw_game;
 }
 
-void add_player(char name[]) {
-	FILE* amar;
-	amar = fopen("amar.dat", "ab");
-	if (!amar) {
-		printf("can\'t add your user amar");
-		return;
-	}
-	amar_player player;
-	strcpy(player.name, name);
-	player.draw_game = 0, player.lose_game = 0, player.win_game = 0, player.total_game = 0;
-	fwrite(&player, sizeof(amar_player), 1, amar);
-	fclose(amar);
-}
-
 void chenge_amar(char name[],int halat){
 	// 0-->lose / 1-->win / 2-->draw
 	FILE* amar;

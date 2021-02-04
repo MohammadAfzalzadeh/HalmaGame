@@ -1,28 +1,27 @@
 #pragma once
-//#include"../basickFunction.h"
-//#include"log in.h"
-//#include"main_menu.cpp"
-/*
-void read_pas(char pass[]){
-    char read_char;
-    int count_char=0;
-    read_char=getch();
-    while (read_char!=13)
-    {
-        printf("*");
-        pass[count_char]=read_char;
-        count_char++;
-        read_char=getch();
-    }  
-	printf("\n");
+struct amar_player_sign_in
+{
+	char name[100];
+	int total_game;
+	int win_game;
+	int draw_game;
+	int lose_game;
+};
+
+void add_player_amar(char name[]) {
+	FILE* amar;
+	amar = fopen("amar.dat", "ab");
+	if (!amar) {
+		printf("can\'t add your user amar");
+		return;
+	}
+	amar_player_sign_in player;
+	strcpy(player.name, name);
+	player.draw_game = 0, player.lose_game = 0, player.win_game = 0, player.total_game = 0;
+	fwrite(&player, sizeof(amar_player), 1, amar);
+	fclose(amar);
 }
-*/
-/*
-void sleep(unsigned int mseconds=10000) {
-    clock_t goal = mseconds + clock();
-    while (goal > clock());
-}
-*/
+
 int apend_to_file(char username[],char password[]){
     FILE * add_acount;
     add_acount=fopen("acount.dat","ab");
@@ -34,9 +33,8 @@ int apend_to_file(char username[],char password[]){
     fwrite(password, sizeof(char), 100, add_acount) ;        
     fclose(add_acount);
     printf("your user added\n");
+	add_player_amar(username);
 	//sleep();
-   // menu();
-   // log_in();
 	return 1;
 }
 
