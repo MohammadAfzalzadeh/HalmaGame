@@ -13,7 +13,9 @@
 #include"save_game.h"
 #include"puase_menu.h"
 #include"move.h"
+#include"amar.h"
 #include"nahveh_anjam_bazi.h"
+
 
 
 
@@ -29,8 +31,8 @@ int main() {
 	ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
 	//set title for console 
 	SetConsoleTitle("halma project");
-	//tarig moteghyer ha
-	if (!menu())
+	char name[100]="";
+	if (!menu(name))
 		exit(0);
 	int pos_x=0, pos_y=0;
 	//baze tarif n moheme ke (8,24) bashe
@@ -45,7 +47,7 @@ int main() {
 	int i = 0;
 	int ps = 0;
 	//farakhni tabe start ta tvabe lazem az file start.h ra farakhni konad va mohasebat barayeh shoroe kar angam shvad 
-	if (nahveh_bazi() == 1)
+	if (nahveh_bazi(name) == 1)
 		start(mohreh_dar_aval, state, n, camp, leave_camp, star_c, number_c);
 	else {
 		ReadSaveGame(state, camp, recentlymove, star_c, number_c, leave_camp, n, turn, bazi_count);
