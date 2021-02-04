@@ -1,0 +1,15 @@
+white
+black
+navy blue
+green
+cyan
+red
+purple
+gray
+yellow
+blue
+light green
+light cyan
+light red
+pink
+light yellow
