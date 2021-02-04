@@ -4,12 +4,12 @@ int rand_between(int min, int max) {
 	int random = (rand() % (max - min)) + min;
 	return random;
 }
-void AI_move(int& x1, int& y1, int& x2, int& y2,int star_c,int number_c,int n,int state[][25],int camp[][25],int turn,int recentlymove[][5],int leave_camp) {
+void AI_move(int& x1, int& y1, int& x2, int& y2,int star_c,int number_c,int n,int state[][25],int camp[][25],int turn,int recentlymove[][5],int leave_camp,char name[]) {
 	int i,ps, primer_s = 1;
 	int validmove[2][50];
 	while (primer_s)
 	{
-		showStatus(n, turn, 1, star_c, number_c);
+		showStatus(n, turn, 1, star_c, number_c,name);
 		//entekhabeh moreh shoro
 		int ps = 1;
 		do

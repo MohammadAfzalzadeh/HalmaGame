@@ -101,7 +101,7 @@ int check_draw(int recentlymove[][5]) {
 	///////////////////////////////////
 }
 // tabe asli ke baes harkat cursor mishe ta fard ENTER bezanad on noghteh ra bar migar danad ba estefadeh az ( int& pos1_x, int& pos1_y)
-void move_with_keyboard(int n,int player, int& pos1_x, int& pos1_y, int& pos_x, int& pos_y, int recentlymove[][5],int player1_color,int player2_color,int state[][25],int camp[][25],int leave_camp_value,int turn,int is_comp) {
+void move_with_keyboard(int n,int player, int& pos1_x, int& pos1_y, int& pos_x, int& pos_y, int recentlymove[][5],int player1_color,int player2_color,int state[][25],int camp[][25],int leave_camp_value,int turn,int is_comp,char name[]) {
 	char ch;
 	int playerR;
 	if (player == 1)
@@ -117,7 +117,7 @@ void move_with_keyboard(int n,int player, int& pos1_x, int& pos1_y, int& pos_x, 
 		WSAD_key(ch, pos_x, pos_y);
 		if (Q_key(ch)) {
 			if (check_draw(recentlymove))
-				showStatus(n,playerR,3,player1_color,player2_color,is_comp);
+				showStatus(n,playerR,3,player1_color,player2_color,name,is_comp);
 				
 		}
 		check_cursor_in_table(n, pos_x, pos_y);
