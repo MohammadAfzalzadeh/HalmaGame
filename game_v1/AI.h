@@ -34,6 +34,7 @@ void AI_move(int& x1, int& y1, int& x2, int& y2,int star_c,int number_c,int n,in
 	int magsad = rand_between(0, i);
 	x2 = validmove[0][magsad];
 	y2 = validmove[1][magsad];
+	sleep(2000);
 	unlite_valid_move(i, validmove);
 	ArryToPosInScrean(x2, y2, x2, y2);
 }
