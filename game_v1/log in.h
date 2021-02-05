@@ -1,6 +1,10 @@
 #pragma once
+const int pass = 1;
+const int user = 2;
 
-void read_pas(char pass[]){
+int read_pas_user(char string[],int noe){
+	//noe ==1  pass
+	//noe ==2  user
     char read_char;
     int count_char=0;
 	read_char = _getch();
@@ -8,30 +12,33 @@ void read_pas(char pass[]){
     while (read_char!=13)
     {
         if((read_char >='A'&& read_char <= 'Z')||(read_char >='a'&& read_char <= 'z') ||(read_char >='0'&& read_char <= '9') ){
-            printf("*");
-			if(read_char=='0')
-				pass[count_char]=read_char;
-			else
-				pass[count_char] = read_char-'0';
+			if (noe == 1) {
+				printf("*");
+				if (read_char == '0')
+					string[count_char] = read_char;
+				else
+					string[count_char] = read_char - '0';
+			}
+			else {
+				printf("%c",read_char);
+				string[count_char] = read_char;
+			}
             count_char++;
-			read_char = _getch();
+			if (count_char > 30) {
+				printf("\n max of username and password is 30 caracter\n");
+				//sleep()
+				return 0;
+			}
         }
-        /* 
-        else if(read_char==8||read_char==127||read_char=='\b'){
-            printf("\a");
-            Etc_ch=getch();
+        else if(read_char==0||read_char==127 || read_char==-32){
+            read_char=_getch();
             read_char='\0';
         }
-        else
-        {
-            read_char='\0';
-            read_char=getch();
-           
-        }
-        */
+		read_char = _getch();
     }  
-	pass[count_char] = '\0';
+	string[count_char] = '\0';
 	printf("\n");
+	return 1;
 }
 int search_in_file(char username[],char password[]){
     FILE * search_acount;
@@ -68,20 +75,28 @@ int search_in_file(char username[],char password[]){
 }
 
 int log_in(char name[]){
-    system("cls");
-    printf("                     Log In page    \n");
-    //بعدا حواست به این باشه که ممکنه نام کاربری(یا رمز عبور) از آرایه بیرون بزنه
 	char username[100];
-    char password[100];
-    printf("enter your username:\n");
-    gets_s(username);
-    printf("enter your password:\n");
-    read_pas(password);
-    int s=search_in_file(username,password);
+	char password[100];
+	int ps = 1;
+	while (1)
+	{
+		system("cls");
+		printf("                     Log In page    \n");
+		printf("enter your username:\n");
+		if (read_pas_user(password, user))
+			ps = 2;
+		printf("enter your password:\n");
+		if (read_pas_user(password,pass) && ps == 2)
+			ps = 0;
+		else
+			ps = 1;
+
+	}    
+	int s = search_in_file(username, password);
 	if (s)
 		strcpy(name, username);
-    //sleep();
-	return s;    
+	//sleep();
+	return s;
 }
 
 

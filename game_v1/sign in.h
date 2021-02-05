@@ -39,15 +39,21 @@ int apend_to_file(char username[],char password[]){
 }
 
 int sign_in(){
-    system("cls");
-    printf("                     Sign In page    \n");
-    //بعدا حواست به این باشه که ممکنه نام کاربری(یا رمز عبور) از آرایه بیرون بزنه
-    char username[100];
-    char password[100];
-    printf("enter your username:\n");
-    gets_s(username);
-    printf("enter your password:\n");
-    read_pas(password);
+	char username[100];
+	char password[100];
+	int ps = 1;
+	while (ps) {
+		system("cls");
+		printf("                     Sign In page    \n");
+		printf("enter your username:\n");
+		if (read_pas_user(password, user))
+			ps = 2;
+		printf("enter your password:\n");
+		if (read_pas_user(password, pass) && ps == 2)
+			ps = 0;
+		else
+			ps = 1;
+	}
 	int apend = apend_to_file(username, password);
 	return(apend);
 }
