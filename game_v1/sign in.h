@@ -34,7 +34,7 @@ int apend_to_file(char username[],char password[]){
     fclose(add_acount);
     printf("your user added\n");
 	add_player_amar(username);
-	//sleep();
+	sleep(2000);
 	return 1;
 }
 
@@ -46,7 +46,7 @@ int sign_in(){
 		system("cls");
 		printf("                     Sign In page    \n");
 		printf("enter your username:\n");
-		if (read_pas_user(password, user))
+		if (read_pas_user(username, user))
 			ps = 2;
 		printf("enter your password:\n");
 		if (read_pas_user(password, pass) && ps == 2)

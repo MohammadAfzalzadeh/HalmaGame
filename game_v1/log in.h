@@ -26,7 +26,7 @@ int read_pas_user(char string[],int noe){
             count_char++;
 			if (count_char > 30) {
 				printf("\n max of username and password is 30 caracter\n");
-				//sleep()
+				sleep(2000);
 				return 0;
 			}
         }
@@ -78,12 +78,12 @@ int log_in(char name[]){
 	char username[100];
 	char password[100];
 	int ps = 1;
-	while (1)
+	while (ps)
 	{
 		system("cls");
 		printf("                     Log In page    \n");
 		printf("enter your username:\n");
-		if (read_pas_user(password, user))
+		if (read_pas_user(username, user))
 			ps = 2;
 		printf("enter your password:\n");
 		if (read_pas_user(password,pass) && ps == 2)
@@ -95,7 +95,7 @@ int log_in(char name[]){
 	int s = search_in_file(username, password);
 	if (s)
 		strcpy(name, username);
-	//sleep();
+	sleep(2000);
 	return s;
 }
 
