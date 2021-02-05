@@ -85,13 +85,13 @@ void showStatus(int n, int player, int validation,int player1_color,int player2_
 			int random = rand() % 2;
 			if (random == 1) {
 				printf("Y");
-				//sleep
+				sleep(2000);
 				showStatus(n, 3, 2, player1_color, player2_color,name, 1);
 			}
 			else
 			{
 				printf("N");
-				//sleep
+				sleep(2000);
 				showStatus(n, playerR, 1, player1_color, player2_color, name);
 			}
 		}

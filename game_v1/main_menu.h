@@ -8,12 +8,6 @@
 #include"sign in.h"
 #include"basickFunction.h"
 
-//
-//void sleep(unsigned int mseconds=10000) {
-//    clock_t goal = mseconds + clock();
-//    while (goal > clock());
-//}
-
 
 void arrow_key_menu(char ch,int &y){
     if (ch == 0 || ch == 224)
