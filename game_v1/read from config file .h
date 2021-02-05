@@ -5,10 +5,10 @@
 #include <time.h>
 struct myfile
 {
-    int Size=-1;
-    int LeaveCampValue=-1;
-    int BeadsOrder[8]={0};
-    int  ColorPlayer[2]={0};
+    int Size= 10;
+    int LeaveCampValue= 34;
+	int BeadsOrder[8] = { 1, 2 ,3 ,2 };
+    int  ColorPlayer[2]={2,9};
 };
 const int White=15;
 const int Black=0;
@@ -127,14 +127,17 @@ myfile ReadConfigFile(){
 		printf("can\'t open file");
 		return read_file;
 	}
-    for (int i = 0; i < 8; i++)
+	int max_line;
+	fgets(line_in_file[0], 100, config);
+    for (int i = 1; !feof(config); i++)
     {
+		delet_start_spase(line_in_file[i-1]);
         fgets(line_in_file[i],100,config);
-		delet_start_spase(line_in_file[i]);
+		max_line = i;
     }
     fclose(config);
     char *ret;
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < max_line; i++)
     {
         ret=strstr(line_in_file[i],"Size");
         if (ret)
