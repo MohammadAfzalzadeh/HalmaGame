@@ -126,7 +126,7 @@ int main() {
 				gotoxy2(pos_x, pos_y);
 				move_with_keyboard(n, 2, pos1_x, pos1_y, pos_x, pos_y, recentlymove, star_c, number_c, state, camp, leave_camp, turn, is_comp,name);
 				lite(pos1_x, pos1_y, number_c, number, state);
-				if (barasi_mada(1, pos1_x, pos1_y, state)) {
+				if (barasi_mada(2, pos1_x, pos1_y, state)) {
 					NormalMove(pos1_x, pos1_y, n, i, state, validmove);
 					NormalJump(pos1_x, pos1_y, n, i, state, validmove);
 					super_jump(pos1_x, pos1_y, n, i, state, validmove);
