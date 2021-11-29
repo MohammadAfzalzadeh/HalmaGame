@@ -7,7 +7,7 @@ struct myfile
 {
     int Size= 10;
     int LeaveCampValue= 34;
-	int BeadsOrder[8] = { 1, 2 ,3 ,2 };
+	int BeadsOrder[8] = { };
     int  ColorPlayer[2]={2,9};
 };
 const int White=15;
